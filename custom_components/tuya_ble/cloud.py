@@ -54,7 +54,6 @@ from .const import (
     CONF_DEVICE_NAME,
     CONF_PRODUCT_NAME,
     CONF_FUNCTIONS,
-    CONF_STATUS_RANGE,
     DOMAIN,
     TUYA_API_DEVICES_URL,
     TUYA_API_FACTORY_INFO_URL,
@@ -207,6 +206,15 @@ class HASSTuyaBLEDeviceManager(AbstaractTuyaBLEDeviceManager):
                                 CONF_PRODUCT_MODEL: device.get("model"),
                                 CONF_PRODUCT_NAME: device.get("product_name"),
                             }
+                            spec_response = await self._hass.async_add_executor_job(
+                                    item.api.get,
+                                    TUYA_API_DEVICE_SPECIFICATION % device.get("id")
+                            )
+                            spec_response_result = spec_response.get(TUYA_RESPONSE_RESULT)
+                            if spec_response_result:
+                                functions = spec_response_result.get("functions")
+                                if functions:
+                                    item.credentials[mac][CONF_FUNCTIONS] = functions
 
                             spec_response = await self._hass.async_add_executor_job(
                                     item.api.get,
@@ -301,7 +309,6 @@ class HASSTuyaBLEDeviceManager(AbstaractTuyaBLEDeviceManager):
                 credentials.get(CONF_PRODUCT_MODEL, ""),
                 credentials.get(CONF_PRODUCT_NAME, ""),
                 credentials.get(CONF_FUNCTIONS, []),
-                credentials.get(CONF_STATUS_RANGE, []),
             )
             _LOGGER.debug("Retrieved: %s", result)
             if save_data:

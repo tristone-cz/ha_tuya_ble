@@ -341,7 +341,7 @@ devices_database: dict[str, TuyaBLECategoryInfo] = {
         products={
             **dict.fromkeys(
             [
-            "nvfrtxlq",
+              "nvfrtxlq",
             ],  # device product_id
             TuyaBLEProductInfo(
                 name="LGB102 Magic Strip Lights",
