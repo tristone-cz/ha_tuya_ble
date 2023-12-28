@@ -21,7 +21,6 @@ from homeassistant.components.tuya.const import (
     CONF_ACCESS_SECRET,
     CONF_APP_TYPE,
     CONF_AUTH_TYPE,
-    CONF_COUNTRY_CODE,
     CONF_ENDPOINT,
     DOMAIN as TUYA_DOMAIN,
     TUYA_RESPONSE_RESULT,
