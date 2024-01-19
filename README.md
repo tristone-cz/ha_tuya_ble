@@ -2,9 +2,9 @@
 
 ## Overview
 
-This integration supports Tuya devices connected via BLE and adds riecov42 for my local install.
+This integration supports Tuya devices connected via BLE and adds riecov42 for my local install. Forked from @Snuffy2
 
-_Inspired by code of [@redphx](https://github.com/redphx/poc-tuya-ble-fingerbot) & forked from https://github.com/PlusPlus-ua/ha_tuya_ble_
+_Inspired by code of [@redphx](https://github.com/redphx/poc-tuya-ble-fingerbot) & forked from https://github.com/PlusPlus-ua/ha_tuya_ble_ 
 
 ## Installation
 
@@ -48,7 +48,7 @@ The integration works locally, but connection to Tuya BLE device requires device
 * Irrigation computer (category_id 'ggq')
   + Irrigation computer (product_id '6pahkcau')
 
-## Support original developer @PlusPlus-ua, not me:
+## Note that the original hasn't been updated in a long time, still, Support original developer @PlusPlus-ua:
 
 I am working on this integration in Ukraine. Our country was subjected to brutal aggression by Russia. The war still continues. The capital of Ukraine - Kyiv, where I live, and many other cities and villages are constantly under threat of rocket attacks. Our air defense forces are doing wonders, but they also need support. So if you want to help the development of this integration, donate some money and I will spend it to support our air defense.
 <br><br>
