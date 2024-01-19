@@ -225,7 +225,8 @@ mapping: dict[str, TuyaBLECategorySensorMapping] = {
         products={
             **dict.fromkeys(
                 [
-                    "mknd4lci"
+                    "mknd4lci",
+                    "riecov42"
                 ],  # Fingerbot Plus
                 [
                     TuyaBLEBatteryMapping(dp_id=105),
