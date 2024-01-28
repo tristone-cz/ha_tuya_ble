@@ -329,6 +329,14 @@ devices_database: dict[str, TuyaBLECategoryInfo] = {
             )
         },
     ),
+    "sfkzq": TuyaBLECategoryInfo(
+        products={
+            "nxquc5lb", # device product_id
+            TuyaBLEProductInfo( 
+                name="Water valve controller",
+            ),
+        },
+    ),
 }
 
 
