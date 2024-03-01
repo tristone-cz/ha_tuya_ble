@@ -16,16 +16,7 @@ from homeassistant.const import (
 )
 
 from homeassistant.core import HomeAssistant
-from homeassistant.components.tuya.const import (
-    CONF_ACCESS_ID,
-    CONF_ACCESS_SECRET,
-    CONF_APP_TYPE,
-    CONF_AUTH_TYPE,
-    CONF_ENDPOINT,
-    DOMAIN as TUYA_DOMAIN,
-    TUYA_RESPONSE_RESULT,
-    TUYA_RESPONSE_SUCCESS,
-)
+
 from homeassistant.helpers.entity import DeviceInfo, EntityDescription
 from homeassistant.helpers.update_coordinator import (
     CoordinatorEntity,
@@ -45,6 +36,12 @@ from .tuya_ble import (
 )
 
 from .const import (
+    TUYA_DOMAIN,
+    CONF_ACCESS_ID,
+    CONF_ACCESS_SECRET,
+    CONF_APP_TYPE,
+    CONF_AUTH_TYPE,
+    CONF_ENDPOINT,
     CONF_PRODUCT_MODEL,
     CONF_UUID,
     CONF_LOCAL_KEY,
@@ -59,6 +56,8 @@ from .const import (
     TUYA_API_FACTORY_INFO_URL,
     TUYA_API_DEVICE_SPECIFICATION,
     TUYA_FACTORY_INFO_MAC,
+    TUYA_RESPONSE_RESULT,
+    TUYA_RESPONSE_SUCCESS,
 )
 
 _LOGGER = logging.getLogger(__name__)
