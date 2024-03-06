@@ -32,7 +32,11 @@ from .tuya_ble import SERVICE_UUID, TuyaBLEDeviceCredentials
 
 from .const import (
     TUYA_COUNTRIES,
+    TUYA_SMART_APP,
     SMARTLIFE_APP,
+    TUYA_RESPONSE_SUCCESS,
+    TUYA_RESPONSE_CODE,
+    TUYA_RESPONSE_MSG,
     CONF_ACCESS_ID,
     CONF_ACCESS_SECRET,
     CONF_APP_TYPE,
