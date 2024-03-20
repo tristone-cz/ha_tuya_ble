@@ -58,6 +58,9 @@
             "countdown_duration_z2": {
                 "name": "Irrigation duration - Zone 2"
             },
+            "countdown": {
+                "name": "Irrigation duration"
+            },
             "down_position": {
                 "name": "Down position"
             },
@@ -97,6 +100,12 @@
                     "push": "Push",
                     "switch": "Switch"
                 }
+            },
+            "weather_delay": {
+                "name": "Weather delay"
+            },
+            "smart_weather": {
+                "name": "Smart weather"
             },
             "reminder_mode": {
                 "name": "Reminder mode",
@@ -151,6 +160,9 @@
             "moisture": {
                 "name": "Moisture"
             },
+            "work_state": {
+                "name": "Work state"
+            },
             "residual_electricity": {
                 "name": "Battery"
             },
@@ -168,6 +180,12 @@
             },
             "use_time_z2": {
                 "name": "Last irrigation time - Zone 2"
+            },
+            "use_time": {
+                "name": "Accumulated use time"
+            },
+            "use_time_one": {
+                "name": "Last irrigation time"
             },
             "water_intake": {
                 "name": "Water intake"
@@ -239,6 +257,9 @@
             },
             "water_valve_z2": {
                 "name": "Irrigation valve - Zone 2"
+            },
+            "weather_switch": {
+                "name": "Weather switch"
             },
             "window_check": {
                 "name": "Window Check"
