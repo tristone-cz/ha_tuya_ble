@@ -305,6 +305,23 @@ mapping: dict[str, TuyaBLECategorySensorMapping] = {
             ],
         },
     ),
+    "sfkzq": TuyaBLECategorySensorMapping(
+        products={
+            "0axr5s0b": [  # Valve Controller
+                TuyaBLEBatteryMapping(dp_id=7),
+                TuyaBLESensorMapping(
+                    #dp_id=15,
+                    dp_id=11,
+                    description=SensorEntityDescription(
+                        key="time_left",
+                        device_class=SensorDeviceClass.DURATION,
+                        native_unit_of_measurement=UnitOfTime.SECONDS,
+                        state_class=SensorStateClass.MEASUREMENT,
+                    ),
+                ),
+            ],
+        },
+    ),
 }
 
 
