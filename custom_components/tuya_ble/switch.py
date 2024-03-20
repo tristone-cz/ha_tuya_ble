@@ -71,6 +71,13 @@ def is_fingerbot_in_switch_mode(
             result = datapoint.value == 1
     return result
 
+def is_water_valve_in_switch_mode(
+    self: TuyaBLESwitch, product: TuyaBLEProductInfo
+) -> bool:
+    result: bool = False
+    if product.watervalve:
+        result = True
+    return result
 
 def get_fingerbot_program_repeat_forever(
     self: TuyaBLESwitch, product: TuyaBLEProductInfo
@@ -106,6 +113,24 @@ class TuyaBLEFingerbotSwitchMapping(TuyaBLESwitchMapping):
     )
     is_available: TuyaBLESwitchIsAvailable = is_fingerbot_in_switch_mode
 
+@dataclass
+class TuyaBLEWaterValveSwitchMapping(TuyaBLESwitchMapping):
+    description: SwitchEntityDescription = field(
+        default_factory=lambda: SwitchEntityDescription(
+            key="water_valve",
+        )
+    )
+    is_available: TuyaBLESwitchIsAvailable = is_water_valve_in_switch_mode
+
+
+@dataclass
+class TuyaBLEWaterValveWeatherSwitchMapping(TuyaBLESwitchMapping):
+    description: SwitchEntityDescription = field(
+        default_factory=lambda: SwitchEntityDescription(
+            key="weather_switch",
+            icon="mdi:cloud-question",
+        )
+    )
 
 @dataclass
 class TuyaBLEReversePositionsMapping(TuyaBLESwitchMapping):
@@ -325,6 +350,14 @@ mapping: dict[str, TuyaBLECategorySwitchMapping] = {
                         entity_registry_enabled_default=True,
                     ),
                 ),
+            ],
+        },
+    ),
+    "sfkzq": TuyaBLECategorySwitchMapping(
+        products={
+            "nxquc5lb": [ # Smart water timer - SOP10
+                TuyaBLEWaterValveSwitchMapping(dp_id=1),
+                TuyaBLEWaterValveWeatherSwitchMapping(dp_id=14),
             ],
         },
     ),
