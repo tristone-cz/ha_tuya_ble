@@ -85,3 +85,19 @@ and this project adheres to [Semantic Versioning].
 
 - Connection to the device is postponed now. Previously some out of range device might prevents HA from fully booting.
 - Improved connection stability.
+
+
+## [0.2.0] - 2024-03-21
+
+### Added
+
+- Add sfkzq/nxquc5lb device
+
+### Changed
+
+- Update readme (forked from)
+
+### Fixed
+
+- fix: Compatibility with HA 2024.1
+- Fix deprecated
