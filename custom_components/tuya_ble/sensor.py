@@ -360,6 +360,16 @@ mapping: dict[str, TuyaBLECategorySensorMapping] = {
             ],
         },
     ),
+    "cl": TuyaBLECategorySensorMapping(
+        products={
+            **dict.fromkeys(
+                ["4pbr8eig"], # Blind Controller
+                [
+                    TuyaBLEBatteryMapping(dp_id=13),
+                ],
+            ),
+        }
+    ),
 }
 def rssi_getter(sensor: TuyaBLESensor) -> None:
     sensor._attr_native_value = sensor._device.rssi
