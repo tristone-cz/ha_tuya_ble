@@ -67,6 +67,11 @@ class TuyaBLECategoryCoverMapping:
 # - [ ] 107 - Reset
 
 # Curtain Controller
+# - [X] 1   - State (0=open, 1=stop, 2=close)
+# - [X] 2   - Position Set
+# - [X] 3   - Position (RAW)
+# - [X] 13  - Battery (RAW)
+
 
 mapping: dict[str, TuyaBLECategoryCoverMapping] = {
     "cl": TuyaBLECategoryCoverMapping(
