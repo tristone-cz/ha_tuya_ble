@@ -230,6 +230,14 @@
       "program": {
         "name": "Program: position[/time];..."
       }
+    },
+    "cover": {
+      "ble_blind_controller": {
+        "name": "Blind Motor"
+      },
+      "ble_curtain_controller": {
+        "name": "Curtain Motor"
+      }
     }
   },
   "options": {

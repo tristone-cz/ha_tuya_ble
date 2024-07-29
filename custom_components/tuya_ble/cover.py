@@ -52,43 +52,48 @@ class TuyaBLECategoryCoverMapping:
     mapping: list[TuyaBLECoverMapping] | None = None
 
 
+# Blind Controller
+# - [X] 1   - State (0=open, 1=stop, 2=close)
+# - [X] 3   - Position (RAW)
+# - [ ] 4   - Opening Mode
+# - [ ] 5   - UNKNOWN?
+# - [ ] 7   - Work State (0=stdby, 1=success, 2=learning)
+# - [ ] 13  - Battery
+# - [ ] 101 - Direction
+# - [ ] 102 - Upper Limit
+# - [ ] 103 - UNKNOWN? DT_BOOL
+# - [ ] 104 - UNKNOWN? DT_BOOL
+# - [ ] 105 - UNKNOWN? DT_VALUE
+# - [ ] 107 - Reset
+
+# Curtain Controller
+
 mapping: dict[str, TuyaBLECategoryCoverMapping] = {
     "cl": TuyaBLECategoryCoverMapping(
         products={
-            **dict.fromkeys(
-                [
-                "4pbr8eig",
-                ],  # BLE Blind Controller
-                [
-                # Blind Controller
-                # - [X] 1   - State (0=open, 1=stop, 2=close)
-                # - [X] 3   - Position (RAW)
-                # - [ ] 4   - Opening Mode
-                # - [ ] 5   - UNKNOWN?
-                # - [ ] 7   - Work State (0=stdby, 1=success, 2=learning)
-                # - [ ] 13  - Battery
-                # - [ ] 101 - Direction
-                # - [ ] 102 - Upper Limit
-                # - [ ] 103 - UNKNOWN? DT_BOOL
-                # - [ ] 104 - UNKNOWN? DT_BOOL
-                # - [ ] 105 - UNKNOWN? DT_VALUE
-                # - [ ] 107 - Reset
-                TuyaBLECoverMapping(
-                    description=CoverEntityDescription(
-                        key="ble_blind_controller",
-                    ),
-                    cover_state_dp_id=1,
-                    cover_position_set_dp=2,
-                    cover_position_dp_id=3,
-                    cover_opening_mode_dp_id=4,
-                    cover_work_state_dp_id=7,
-                    cover_battery_dp_id=13,
-                    cover_motor_direction_dp_id=101,
-                    cover_set_upper_limit_dp_id=102,
-                    cover_factory_reset_dp_id=107
-                    ),
-                ],
+            "4pbr8eig": TuyaBLECoverMapping( # BLE Blind Controller
+                description=CoverEntityDescription(
+                    key="ble_blind_controller",
+                ),
+                cover_state_dp_id=1,
+                cover_position_set_dp=2,
+                cover_position_dp_id=3,
+                cover_opening_mode_dp_id=4,
+                cover_work_state_dp_id=7,
+                cover_battery_dp_id=13,
+                cover_motor_direction_dp_id=101,
+                cover_set_upper_limit_dp_id=102,
+                cover_factory_reset_dp_id=107
             ),
+            "TEST": TuyaBLECoverMapping(
+                description=CoverEntityDescription(
+                    key="ble_curtain_controller"
+                ),
+                cover_state_dp_id=1,
+                cover_position_dp_id=3,
+                cover_position_set_dp=2,
+                cover_battery_dp_id=13
+            )
         },
     ),
 }
