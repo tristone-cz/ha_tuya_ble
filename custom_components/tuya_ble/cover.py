@@ -76,7 +76,7 @@ class TuyaBLECategoryCoverMapping:
 mapping: dict[str, TuyaBLECategoryCoverMapping] = {
     "cl": TuyaBLECategoryCoverMapping(
         products={
-            "4pbr8eig": TuyaBLECoverMapping( # BLE Blind Controller
+            "4pbr8eig": [TuyaBLECoverMapping( # BLE Blind Controller
                 description=CoverEntityDescription(
                     key="ble_blind_controller",
                 ),
@@ -89,8 +89,8 @@ mapping: dict[str, TuyaBLECategoryCoverMapping] = {
                 cover_motor_direction_dp_id=101,
                 cover_set_upper_limit_dp_id=102,
                 cover_factory_reset_dp_id=107
-            ),
-            "TEST": TuyaBLECoverMapping(
+            )],
+            "TEST": [TuyaBLECoverMapping(
                 description=CoverEntityDescription(
                     key="ble_curtain_controller"
                 ),
@@ -98,7 +98,7 @@ mapping: dict[str, TuyaBLECategoryCoverMapping] = {
                 cover_position_dp_id=3,
                 cover_position_set_dp=2,
                 cover_battery_dp_id=13
-            )
+            )]
         },
     ),
 }
@@ -135,6 +135,11 @@ class TuyaBLECover(TuyaBLEEntity, CoverEntity):
         super().__init__(hass, coordinator, device, product, mapping.description)
         self._mapping = mapping
 
+    @property
+    def supported_features(self) -> CoverEntityFeature:
+        """Return the supported features of the device."""
+        return CoverEntityFeature.CLOSE|CoverEntityFeature.OPEN|CoverEntityFeature.SET_POSITION|CoverEntityFeature.STOP
+
     @callback
     def _handle_coordinator_update(self) -> None:
         """Handle updated data from the coordinator."""
@@ -163,27 +168,36 @@ class TuyaBLECover(TuyaBLEEntity, CoverEntity):
 
     async def async_open_cover(self, **kwargs) -> None:
         """Open a cover."""
-        _LOGGER.debug("Call to open cover %s", self._device.name)
-        if self._mapping.cover_position_set_dp != 0:
+        if self._mapping.cover_state_dp_id != 0:
             datapoint = self._device.datapoints.get_or_create(
-                self._mapping.cover_position_set_dp,
-                TuyaBLEDataPointType.DT_VALUE,
-                100,
-            )
-            if datapoint:
-                self._hass.create_task(datapoint.set_value(100))
-
-    async def async_close_cover(self, **kwargs) -> None:
-        """Set new target temperature."""
-        _LOGGER.debug("Call to close cover %s", self._device.name)
-        if self._mapping.cover_position_set_dp != 0:
-            datapoint = self._device.datapoints.get_or_create(
-                self._mapping.cover_position_set_dp,
+                self._mapping.cover_state_dp_id,
                 TuyaBLEDataPointType.DT_VALUE,
                 0,
             )
             if datapoint:
                 self._hass.create_task(datapoint.set_value(0))
+
+    async def async_stop_cover(self, **kwargs: logging.Any) -> None:
+        """Stop a cover."""
+        if self._mapping.cover_state_dp_id != 0:
+            datapoint = self._device.datapoints.get_or_create(
+                self._mapping.cover_state_dp_id,
+                TuyaBLEDataPointType.DT_VALUE,
+                1,
+            )
+            if datapoint:
+                self._hass.create_task(datapoint.set_value(1))
+
+    async def async_close_cover(self, **kwargs) -> None:
+        """Set new target temperature."""
+        if self._mapping.cover_state_dp_id != 0:
+            datapoint = self._device.datapoints.get_or_create(
+                self._mapping.cover_state_dp_id,
+                TuyaBLEDataPointType.DT_VALUE,
+                2,
+            )
+            if datapoint:
+                self._hass.create_task(datapoint.set_value(2))
 
     async def async_set_cover_position(self, **kwargs: logging.Any) -> None:
         """Set cover position"""
