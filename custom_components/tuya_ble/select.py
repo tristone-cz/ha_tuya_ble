@@ -41,6 +41,11 @@ class TemperatureUnitDescription(SelectEntityDescription):
     key: str = "temperature_unit"
     icon: str = "mdi:thermometer"
     entity_category: EntityCategory = EntityCategory.CONFIG
+    entity_registry_enabled_default = True
+    options: list[str] | None = [
+        UnitOfTemperature.CELSIUS,
+        UnitOfTemperature.FAHRENHEIT,
+    ]
 
 @dataclass
 class TuyaBLEFingerbotModeMapping(TuyaBLESelectMapping):
@@ -71,12 +76,7 @@ mapping: dict[str, TuyaBLECategorySelectMapping] = {
             [
                 TuyaBLESelectMapping(
                     dp_id=101,
-                    description=TemperatureUnitDescription(
-                        options=[
-                            UnitOfTemperature.CELSIUS,
-                            UnitOfTemperature.FAHRENHEIT,
-                        ],
-                    )
+                    description=TemperatureUnitDescription()
                 ),
             ],
         },
@@ -139,10 +139,6 @@ mapping: dict[str, TuyaBLECategorySelectMapping] = {
                 TuyaBLESelectMapping(
                     dp_id=9,
                     description=TemperatureUnitDescription(
-                        options=[
-                            UnitOfTemperature.CELSIUS,
-                            UnitOfTemperature.FAHRENHEIT,
-                        ],
                         entity_registry_enabled_default=False,
                     )
                 ),
@@ -155,12 +151,7 @@ mapping: dict[str, TuyaBLECategorySelectMapping] = {
             [
                 TuyaBLESelectMapping(
                     dp_id=106,
-                    description=TemperatureUnitDescription(
-                        options=[
-                            UnitOfTemperature.CELSIUS,
-                            UnitOfTemperature.FAHRENHEIT,
-                        ],
-                    )
+                    description=TemperatureUnitDescription()
                 ),
                 TuyaBLESelectMapping(
                     dp_id=107,
