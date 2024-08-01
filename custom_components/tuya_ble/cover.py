@@ -170,8 +170,11 @@ class TuyaBLECover(TuyaBLEEntity, CoverEntity):
 
     async def async_open_cover(self, **kwargs) -> None:
         """Open a cover."""
-        if self._mapping.cover_state_dp_id != 0:
-            await self.async_set_cover_position(position=100)
+        await self.async_set_cover_position(position=100)
+        # sometimes the device does not update DP 1 so force the current state
+        if self._attr_current_cover_position != 100:
+            self._attr_is_opening = True
+            self.async_write_ha_state()
 
     async def async_stop_cover(self, **kwargs: logging.Any) -> None:
         """Stop a cover."""
@@ -186,8 +189,11 @@ class TuyaBLECover(TuyaBLEEntity, CoverEntity):
 
     async def async_close_cover(self, **kwargs) -> None:
         """Set new target temperature."""
-        if self._mapping.cover_state_dp_id != 0:
-            await self.async_set_cover_position(position=0)
+        await self.async_set_cover_position(position=0)
+        # sometimes the device does not update DP 1 so force the current state
+        if self._attr_current_cover_position != 0:
+            self._attr_is_closing = True
+            self.async_write_ha_state()
 
     async def async_set_cover_position(self, **kwargs: logging.Any) -> None:
         """Set cover position"""
