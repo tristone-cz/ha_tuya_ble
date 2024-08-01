@@ -4,7 +4,6 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 import logging
-from typing import Callable
 
 from homeassistant.components.cover import (
     CoverEntityDescription,
@@ -16,13 +15,12 @@ from homeassistant.components.cover import (
 )
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant, callback
-from homeassistant.const import STATE_UNKNOWN
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 
 from .const import DOMAIN
 from .devices import TuyaBLEData, TuyaBLEEntity, TuyaBLEProductInfo
-from .tuya_ble import TuyaBLEDataPoint, TuyaBLEDataPointType, TuyaBLEDevice
+from .tuya_ble import TuyaBLEDataPointType, TuyaBLEDevice
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -54,16 +52,17 @@ class TuyaBLECategoryCoverMapping:
 
 # Blind Controller
 # - [X] 1   - State (0=open, 1=stop, 2=close)
+# - [X] 2   - Position (SET)
 # - [X] 3   - Position (RAW)
 # - [ ] 4   - Opening Mode
 # - [ ] 5   - UNKNOWN?
-# - [ ] 7   - Work State (0=stdby, 1=success, 2=learning)
-# - [ ] 13  - Battery
+# - [X] 7   - Work State (0=stdby, 1=success, 2=learning)
+# - [X] 13  - Battery
 # - [ ] 101 - Direction
 # - [ ] 102 - Upper Limit
 # - [ ] 103 - UNKNOWN? DT_BOOL
 # - [ ] 104 - UNKNOWN? DT_BOOL
-# - [ ] 105 - UNKNOWN? DT_VALUE
+# - [X] 105 - Speed
 # - [ ] 107 - Reset
 
 # Curtain Controller
@@ -76,7 +75,10 @@ class TuyaBLECategoryCoverMapping:
 mapping: dict[str, TuyaBLECategoryCoverMapping] = {
     "cl": TuyaBLECategoryCoverMapping(
         products={
-            "4pbr8eig": [TuyaBLECoverMapping( # BLE Blind Controller
+            **dict.fromkeys([
+                "4pbr8eig", "qqdxfdht"
+            ],
+            [TuyaBLECoverMapping( # BLE Blind Controller
                 description=CoverEntityDescription(
                     key="ble_blind_controller",
                 ),
@@ -89,16 +91,16 @@ mapping: dict[str, TuyaBLECategoryCoverMapping] = {
                 cover_motor_direction_dp_id=101,
                 cover_set_upper_limit_dp_id=102,
                 cover_factory_reset_dp_id=107
-            )],
-            "TEST": [TuyaBLECoverMapping(
-                description=CoverEntityDescription(
-                    key="ble_curtain_controller"
-                ),
-                cover_state_dp_id=1,
-                cover_position_dp_id=3,
-                cover_position_set_dp=2,
-                cover_battery_dp_id=13
-            )]
+            )]),
+            # "...": [TuyaBLECoverMapping(
+            #     description=CoverEntityDescription(
+            #         key="ble_curtain_controller"
+            #     ),
+            #     cover_state_dp_id=1,
+            #     cover_position_dp_id=3,
+            #     cover_position_set_dp=2,
+            #     cover_battery_dp_id=13
+            # )] # https://github.com/PlusPlus-ua/ha_tuya_ble/issues/126
         },
     ),
 }
@@ -169,13 +171,7 @@ class TuyaBLECover(TuyaBLEEntity, CoverEntity):
     async def async_open_cover(self, **kwargs) -> None:
         """Open a cover."""
         if self._mapping.cover_state_dp_id != 0:
-            datapoint = self._device.datapoints.get_or_create(
-                self._mapping.cover_state_dp_id,
-                TuyaBLEDataPointType.DT_VALUE,
-                0,
-            )
-            if datapoint:
-                self._hass.create_task(datapoint.set_value(0))
+            await self.async_set_cover_position(position=100)
 
     async def async_stop_cover(self, **kwargs: logging.Any) -> None:
         """Stop a cover."""
@@ -191,13 +187,7 @@ class TuyaBLECover(TuyaBLEEntity, CoverEntity):
     async def async_close_cover(self, **kwargs) -> None:
         """Set new target temperature."""
         if self._mapping.cover_state_dp_id != 0:
-            datapoint = self._device.datapoints.get_or_create(
-                self._mapping.cover_state_dp_id,
-                TuyaBLEDataPointType.DT_VALUE,
-                2,
-            )
-            if datapoint:
-                self._hass.create_task(datapoint.set_value(2))
+            await self.async_set_cover_position(position=0)
 
     async def async_set_cover_position(self, **kwargs: logging.Any) -> None:
         """Set cover position"""
