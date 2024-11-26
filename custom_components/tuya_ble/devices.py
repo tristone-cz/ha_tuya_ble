@@ -309,7 +309,7 @@ devices_database: dict[str, TuyaBLECategoryInfo] = {
         products={
             **dict.fromkeys(
                 [
-                    "4pbr8eig"
+                    "4pbr8eig", "kcy0xpi"
                 ],
                 TuyaBLEProductInfo(
                     name="Blind Controller"
