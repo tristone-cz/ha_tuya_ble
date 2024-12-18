@@ -76,7 +76,7 @@ mapping: dict[str, TuyaBLECategoryCoverMapping] = {
     "cl": TuyaBLECategoryCoverMapping(
         products={
             **dict.fromkeys([
-                "4pbr8eig", "qqdxfdht", "kcy0x4pi"
+                "4pbr8eig", "qqdxfdht"
             ],
             [TuyaBLECoverMapping( # BLE Blind Controller
                 description=CoverEntityDescription(
@@ -92,15 +92,15 @@ mapping: dict[str, TuyaBLECategoryCoverMapping] = {
                 cover_set_upper_limit_dp_id=102,
                 cover_factory_reset_dp_id=107
             )]),
-            # "...": [TuyaBLECoverMapping(
-            #     description=CoverEntityDescription(
-            #         key="ble_curtain_controller"
-            #     ),
-            #     cover_state_dp_id=1,
-            #     cover_position_dp_id=3,
-            #     cover_position_set_dp=2,
-            #     cover_battery_dp_id=13
-            # )] # https://github.com/PlusPlus-ua/ha_tuya_ble/issues/126
+            "kcy0x4pi": [TuyaBLECoverMapping(
+                description=CoverEntityDescription(
+                    key="ble_curtain_controller"
+                ),
+                cover_state_dp_id=1,
+                cover_position_dp_id=3,
+                cover_position_set_dp=2,
+                cover_battery_dp_id=13
+            )]
         },
     ),
 }
@@ -145,7 +145,7 @@ class TuyaBLECover(TuyaBLEEntity, CoverEntity):
     @callback
     def _handle_coordinator_update(self) -> None:
         """Handle updated data from the coordinator."""
-        _LOGGER.debug("Updated data for %s: %s", self._device.name, self._device.datapoints)
+        _LOGGER.debug("Updated data for %s: %s", self._device.name, self._device.datapoints.__dict__())
         if self._mapping.cover_state_dp_id != 0:
             datapoint = self._device.datapoints[self._mapping.cover_state_dp_id]
             if datapoint:
