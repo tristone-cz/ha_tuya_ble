@@ -270,7 +270,8 @@ devices_database: dict[str, TuyaBLECategoryInfo] = {
             **dict.fromkeys(
                 [
                     "mknd4lci",
-                    "riecov42"
+                    "riecov42",
+                    "bs3ubslo"
                 ],  # device product_ids
                 TuyaBLEProductInfo(
                     name="Fingerbot Plus",
