@@ -32,6 +32,9 @@
     "button": {
       "push": {
         "name": "Push"
+      },
+      "ble_unlock_check": {
+        "name": "Unlock"
       }
     },
     "number": {
@@ -70,6 +73,12 @@
       },
       "countdown_duration_z2": {
         "name": "Irrigation duration - Zone 2"
+      },
+      "beep_volume": {
+          "name": "Lock Volume"
+      },
+      "language": {
+          "name": "Lock Language"
       }
     },
     "select": {
@@ -146,28 +155,37 @@
         "name": "Water intake"
       },
       "residual_electricity": {
-          "name": "Battery"
+        "name": "Battery"
       },
       "alarm_lock": {
-          "name": "Alarm"
+        "name": "Alarm"
       },
       "wrong_finger": {
-          "name": "Wrong Fingerprint"
+        "name": "Wrong Fingerprint"
       },
       "wrong_password": {
-          "name": "Wrong Password"
+        "name": "Wrong Password"
       },
       "low_battery": {
-          "name": "Low Battery"
+        "name": "Low Battery"
       },
       "time_left": {
-          "name": "Remaining irrigation time"
+        "name": "Remaining irrigation time"
       },
       "use_time_z1": {
-          "name": "Last irrigation time - Zone 1"
+        "name": "Last irrigation time - Zone 1"
       },
       "use_time_z2": {
-          "name": "Last irrigation time - Zone 2"
+        "name": "Last irrigation time - Zone 2"
+      },
+      "unlock_fingerprint": {
+        "name": "Last used Fingerprint"
+      },
+      "unlock_card": {
+        "name": "Last used Card"
+      },
+      "unlock_password": {
+        "name": "Last used Password"
       }
     },
     "switch": {
