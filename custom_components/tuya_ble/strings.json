@@ -75,11 +75,11 @@
         "name": "Irrigation duration - Zone 2"
       },
       "beep_volume": {
-          "name": "Lock Volume"
+        "name": "Lock Volume"
       },
       "language": {
-          "name": "Lock Language"
-        },
+        "name": "Lock Language"
+      },
       "countdown": {
         "name": "Irrigation duration"
       }
@@ -110,7 +110,7 @@
         }
       },
       "beep_volume": {
-          "name": "Lock Volume"
+        "name": "Lock Volume"
       }
     },
     "binary_sensor": {
@@ -200,92 +200,93 @@
         "name": "Last used Password"
       },
       "use_time": {
-          "name": "Accumulated use time"
+        "name": "Accumulated use time"
       },
       "use_time_one": {
         "name": "Last irrigation time"
-    },
-    "switch": {
-      "programming_mode": {
-        "name": "Programming Mode" 
-      },
-      "programming_switch": {
-        "name": "Programming Switch"
-      },
-      "antifreeze": {
-        "name": "Antifreeze"
-      },
-      "child_lock": {
-        "name": "Child Lock"
-      },
-      "window_check": {
-        "name": "Window Check"
-      },
-      "water_scale_proof": {
-        "name": "Anti-scale"
-      },
-      "carbon_dioxide_alarm_switch": {
-        "name": "Alarm enabled"
-      },
-      "carbon_dioxide_severely_exceed_alarm": {
-        "name": "Severely exceed alarm"
-      },
-      "low_battery_alarm": {
-        "name": "Low battery alarm"
-      },
-      "manual_control": {
-        "name": "Manual control"
-      },
-      "program": {
-        "name": "Program"
-      },
-      "program_repeat_forever": {
-        "name": "Repeat forever"
-      },      
-      "reverse_positions": {
-        "name": "Reverse positions"
       },
       "switch": {
-        "name": "[%key:component::switch::entity_component::_::name%]"
-      },
-      "lock_motor_state": {
-          "name": "Motor State"
-      },            
-      "water_valve": {
-          "name": "Irrigation valve"
-      },
-      "water_valve_z1": {
-          "name": "Irrigation valve - Zone 1"
-      },
-      "water_valve_z2": {
-          "name": "Irrigation valve - Zone 2"
-      },
-      "weather_switch": {
-          "name": "Weather switch"
-      }
-    },
-    "text": {
-      "program": {
-        "name": "Program: position[/time];..."
-      }
-    }
-  },
-  "options": {
-    "error": {
-      "device_not_registered": "Device is not registered in Tuya cloud",
-      "invalid_auth": "[%key:common::config_flow::error::invalid_auth%]",
-      "login_error": "Login error ({code}): {msg}"
-    },
-    "step": {
-      "login": {
-        "data": {
-          "access_id": "Tuya IoT Access ID",
-          "access_secret": "Tuya IoT Access Secret",
-          "country_code": "Country",
-          "password": "[%key:common::config_flow::data::password%]",
-          "username": "Account"
+        "programming_mode": {
+          "name": "Programming Mode"
         },
-        "description": "Refer to documentation of Tuya integration to retrive the cloud credentials https://www.home-assistant.io/integrations/tuya/\n\nEnter your Tuya credentials."
+        "programming_switch": {
+          "name": "Programming Switch"
+        },
+        "antifreeze": {
+          "name": "Antifreeze"
+        },
+        "child_lock": {
+          "name": "Child Lock"
+        },
+        "window_check": {
+          "name": "Window Check"
+        },
+        "water_scale_proof": {
+          "name": "Anti-scale"
+        },
+        "carbon_dioxide_alarm_switch": {
+          "name": "Alarm enabled"
+        },
+        "carbon_dioxide_severely_exceed_alarm": {
+          "name": "Severely exceed alarm"
+        },
+        "low_battery_alarm": {
+          "name": "Low battery alarm"
+        },
+        "manual_control": {
+          "name": "Manual control"
+        },
+        "program": {
+          "name": "Program"
+        },
+        "program_repeat_forever": {
+          "name": "Repeat forever"
+        },
+        "reverse_positions": {
+          "name": "Reverse positions"
+        },
+        "switch": {
+          "name": "[%key:component::switch::entity_component::_::name%]"
+        },
+        "lock_motor_state": {
+          "name": "Motor State"
+        },
+        "water_valve": {
+          "name": "Irrigation valve"
+        },
+        "water_valve_z1": {
+          "name": "Irrigation valve - Zone 1"
+        },
+        "water_valve_z2": {
+          "name": "Irrigation valve - Zone 2"
+        },
+        "weather_switch": {
+          "name": "Weather switch"
+        }
+      },
+      "text": {
+        "program": {
+          "name": "Program: position[/time];..."
+        }
+      }
+    },
+    "options": {
+      "error": {
+        "device_not_registered": "Device is not registered in Tuya cloud",
+        "invalid_auth": "[%key:common::config_flow::error::invalid_auth%]",
+        "login_error": "Login error ({code}): {msg}"
+      },
+      "step": {
+        "login": {
+          "data": {
+            "access_id": "Tuya IoT Access ID",
+            "access_secret": "Tuya IoT Access Secret",
+            "country_code": "Country",
+            "password": "[%key:common::config_flow::data::password%]",
+            "username": "Account"
+          },
+          "description": "Refer to documentation of Tuya integration to retrive the cloud credentials https://www.home-assistant.io/integrations/tuya/\n\nEnter your Tuya credentials."
+        }
       }
     }
   }
