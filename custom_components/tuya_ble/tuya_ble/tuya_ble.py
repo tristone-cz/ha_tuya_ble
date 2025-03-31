@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import asyncio
+from datetime import datetime, timezone
 import hashlib
 import logging
 import secrets
@@ -46,6 +47,7 @@ from ..const import (
 )
 
 from .exceptions import (
+    TuyaBLEError,
     TuyaBLEDataCRCError,
     TuyaBLEDataFormatError,
     TuyaBLEDataLengthError,
@@ -101,6 +103,9 @@ class TuyaBLEDataPoint:
         self._value = value
         self._changed_by_device = False
         self._update_from_device(timestamp, flags, type, value)
+
+    def __repr__(self) -> str:
+        return f"<TuyaBLEDataPoint id={self.id} timestamp={self.timestamp} type={self.type} flags={self.flags} value={self.value}>"
 
     def _update_from_device(
         self,
@@ -191,12 +196,20 @@ class TuyaBLEDataPoints:
         self._datapoints: dict[int, TuyaBLEDataPoint] = {}
         self._update_started: int = 0
         self._updated_datapoints: list[int] = []
+        self._last_data_received: datetime | None = None
 
     def __len__(self) -> int:
         return len(self._datapoints)
 
     def __getitem__(self, key: int) -> TuyaBLEDataPoint | None:
         return self._datapoints.get(key)
+
+    def __dict__(self) -> dict:
+        return self._datapoints
+
+    @property
+    def last_data_received(self) -> datetime | None:
+        return self._last_data_received
 
     def has_id(self, id: int, type: TuyaBLEDataPointType | None = None) -> bool:
         return (id in self._datapoints) and (
@@ -234,6 +247,7 @@ class TuyaBLEDataPoints:
         type: TuyaBLEDataPointType,
         value: bytes | bool | int | str,
     ) -> None:
+        self._last_data_received = datetime.now(timezone.utc)
         dp = self._datapoints.get(dp_id)
         if dp:
             dp._update_from_device(timestamp, flags, type, value)
@@ -569,6 +583,20 @@ class TuyaBLEDevice:
                     if v:
                         result[dpcode] = v.value
         return result
+
+    def datapoint_log_payload(self) -> dict[Hashable, Any]:
+        item = {}
+        for key, value in self.datapoints.__dict__().items():
+            if isinstance(value, TuyaBLEDataPoint):
+                printable_value = value.value
+            else:
+                printable_value = value
+            item[key] = printable_value
+        return item
+
+    @property
+    def last_data_received(self) -> datetime | None:
+        return self._datapoints.last_data_received
 
     def get_or_create_datapoint(
         self,
@@ -1394,7 +1422,7 @@ class TuyaBLEDevice:
 
         if packet_num < self._input_expected_packet_num:
             _LOGGER.error(
-                "%s: Unexpcted packet (number %s) in notifications, " "expected %s",
+                "%s: Unexpected packet (number %s) in notifications, " "expected %s",
                 self.address,
                 packet_num,
                 self._input_expected_packet_num,
@@ -1420,7 +1448,7 @@ class TuyaBLEDevice:
 
         if len(self._input_buffer) > self._input_expected_length:
             _LOGGER.error(
-                "%s: Unexpcted length of data in notifications, "
+                "%s: Unexpected length of data in notifications, "
                 "received %s expected %s",
                 self.address,
                 len(self._input_buffer),
@@ -1428,9 +1456,18 @@ class TuyaBLEDevice:
             )
             self._clean_input()
             return
-
-        if len(self._input_buffer) == self._input_expected_length:
-            self._parse_input()
+        elif len(self._input_buffer) == self._input_expected_length:
+            try:
+                self._parse_input()
+            except TuyaBLEError as err:
+                _LOGGER.error(
+                    "%s: Error parsing input: %s",
+                    self.address,
+                    err,
+                    exc_info=True,
+                )
+                self._clean_input()
+                return
 
     async def _send_datapoints_v3(self, datapoint_ids: list[int]) -> None:
         """Send new values of datapoints to the device."""

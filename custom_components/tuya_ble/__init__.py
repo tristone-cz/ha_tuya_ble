@@ -29,6 +29,7 @@ PLATFORMS: list[Platform] = [
     Platform.SELECT,
     Platform.SWITCH,
     Platform.TEXT,
+    Platform.COVER,
 ]
 
 _LOGGER = logging.getLogger(__name__)

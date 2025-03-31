@@ -559,6 +559,26 @@ mapping: dict[str, TuyaBLECategoryNumberMapping] = {
             ],
         },
     ),
+    "cl": TuyaBLECategoryNumberMapping(
+        products={
+            **dict.fromkeys(
+                ["4pbr8eig", "qqdxfdht", "kcy0x4pi"],
+                [
+                    TuyaBLENumberMapping(
+                        dp_id=105,
+                        description=NumberEntityDescription(
+                            key="cover_speed",
+                            icon="mdi:speedometer",
+                            native_max_value=40,
+                            native_min_value=1,
+                            native_step=1,
+                            mode=NumberMode.BOX,
+                        ),
+                    )
+                ],
+            )
+        },
+    ),
 }
 
 

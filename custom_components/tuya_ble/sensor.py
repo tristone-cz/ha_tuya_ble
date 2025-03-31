@@ -525,37 +525,24 @@ mapping: dict[str, TuyaBLECategorySensorMapping] = {
             ],
         },
     ),
-    "sfkzq": TuyaBLECategorySensorMapping(
+    "cl": TuyaBLECategorySensorMapping(
         products={
-            "nxquc5lb": [  # Smart water timer - SOP10
-                TuyaBLEBatteryMapping(dp_id=7),
-                TuyaBLESensorMapping(
-                    dp_id=15,
-                    description=SensorEntityDescription(
-                        key="use_time_one",
-                        device_class=SensorDeviceClass.DURATION,
-                        native_unit_of_measurement=UnitOfTime.SECONDS,
-                        state_class=SensorStateClass.MEASUREMENT,
+            **dict.fromkeys(
+                ["4pbr8eig", "qqdxfdht", "kcy0x4pi"],  # Blind Controller
+                [
+                    TuyaBLEBatteryMapping(dp_id=13),
+                    TuyaBLESensorMapping(
+                        dp_id=7,
+                        description=SensorEntityDescription(
+                            key="cover_work_state",
+                            entity_category=EntityCategory.DIAGNOSTIC,
+                            device_class=SensorDeviceClass.ENUM,
+                            options=["STANDBY", "SUCCESS", "LEARNING"],
+                        ),
                     ),
-                ),
-            ],
-        },
-    ),
-    "sfkzq": TuyaBLECategorySensorMapping(
-        products={
-            "nxquc5lb": [  # Smart water timer - SOP10
-                TuyaBLEBatteryMapping(dp_id=7),
-                TuyaBLESensorMapping(
-                    dp_id=15,
-                    description=SensorEntityDescription(
-                        key="use_time_one",
-                        device_class=SensorDeviceClass.DURATION,
-                        native_unit_of_measurement=UnitOfTime.SECONDS,
-                        state_class=SensorStateClass.MEASUREMENT,
-                    ),
-                ),
-            ],
-        },
+                ],
+            ),
+        }
     ),
 }
 
