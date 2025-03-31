@@ -1,4 +1,5 @@
 """The Tuya BLE integration."""
+
 from __future__ import annotations
 
 import logging
@@ -206,11 +207,13 @@ class HASSTuyaBLEDeviceManager(AbstaractTuyaBLEDeviceManager):
                             }
 
                             spec_response = await self._hass.async_add_executor_job(
-                                    item.api.get,
-                                    TUYA_API_DEVICE_SPECIFICATION % device.get("id")
+                                item.api.get,
+                                TUYA_API_DEVICE_SPECIFICATION % device.get("id"),
                             )
 
-                            spec_response_result = spec_response.get(TUYA_RESPONSE_RESULT)
+                            spec_response_result = spec_response.get(
+                                TUYA_RESPONSE_RESULT
+                            )
                             if spec_response_result:
                                 functions = spec_response_result.get("functions")
                                 if functions:
