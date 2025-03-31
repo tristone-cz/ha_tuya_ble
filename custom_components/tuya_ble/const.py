@@ -1,4 +1,5 @@
 """The Tuya BLE integration."""
+
 from __future__ import annotations
 from dataclasses import dataclass
 
@@ -70,6 +71,7 @@ FINGERBOT_MODE_PUSH: Final = "push"
 FINGERBOT_MODE_SWITCH: Final = "switch"
 FINGERBOT_MODE_PROGRAM: Final = "program"
 FINGERBOT_BUTTON_EVENT: Final = "fingerbot_button_pressed"
+
 
 class WorkMode(StrEnum):
     """Work modes."""
@@ -334,6 +336,8 @@ TUYA_COUNTRIES = [
     Country("Zambia", "260", TuyaCloudOpenAPIEndpoint.EUROPE),
     Country("Zimbabwe", "263", TuyaCloudOpenAPIEndpoint.EUROPE),
 ]
+
+
 class DPType(StrEnum):
     """Data point types."""
 
