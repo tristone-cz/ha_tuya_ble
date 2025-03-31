@@ -260,7 +260,7 @@
       "water_valve_z2": {
           "name": "Irrigation valve - Zone 2"
       },
-      "weather_switch" {
+      "weather_switch": {
         "name": "Weather switch"
       }
     },
