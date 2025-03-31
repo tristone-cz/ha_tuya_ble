@@ -509,6 +509,33 @@ devices_database: dict[str, TuyaBLECategoryInfo] = {
                 TuyaBLEProductInfo(
                     name="Irrigation computer",
                 ),
+            )
+        },
+    ),
+    "sfkzq": TuyaBLECategoryInfo(
+        products={
+            "nxquc5lb": TuyaBLEProductInfo(  # device product_id
+                name="Water valve controller",
+            ),
+        },
+    ),
+    "ggq": TuyaBLECategoryInfo(
+        products={
+            **dict.fromkeys(
+                [
+                    "6pahkcau",
+                    "hfgdqhho",
+                ],  # device product_id
+                TuyaBLEProductInfo(
+                    name="Irrigation computer",
+                ),
+            )
+        },
+    ),
+    "sfkzq": TuyaBLECategoryInfo(
+        products={
+            "nxquc5lb": TuyaBLEProductInfo(  # device product_id
+                name="Water valve controller",
             ),
         },
     ),
