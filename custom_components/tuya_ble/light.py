@@ -1,4 +1,5 @@
 """The Tuya BLE integration."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field
@@ -40,6 +41,7 @@ from .tuya_ble import (
 )
 
 _LOGGER = logging.getLogger(__name__)
+
 
 # Most of the code here is identical to the one from the Tuya cloud Light component
 @dataclass
@@ -86,11 +88,9 @@ class ColorData:
         """Get the brightness value from this color data."""
         return round(self.type_data.v_type.remap_value_to(self.v_value, 0, 255))
 
+
 @dataclass
-class TuyaLightEntityDescription(
-            TuyaBLEEntityDescription,
-            LightEntityDescription
-            ):
+class TuyaLightEntityDescription(TuyaBLEEntityDescription, LightEntityDescription):
     """Describe an Tuya light entity."""
 
     brightness_max: DPCode | None = None
@@ -123,20 +123,20 @@ class TuyaLightEntityDescription(
 # ...}
 ProductsMapping: dict[str, dict[str, tuple[TuyaLightEntityDescription, ...]]] = {
     "dd": {
-        "nvfrtxlq" : (
+        "nvfrtxlq": (
             TuyaLightEntityDescription(
-                key= "", # just override the category description from these set keys
+                key="",  # just override the category description from these set keys
                 values_overrides={
                     # So we still get the right enum values if the product isn't set to DP mode in the cloud settings
-                    DPCode.WORK_MODE : {
-                        "range" : {
+                    DPCode.WORK_MODE: {
+                        "range": {
                             WorkMode.COLOUR,
                             "dynamic_mod",
                             "scene_mod",
                             WorkMode.MUSIC,
                         }
                     }
-                }
+                },
             ),
         )
     }
@@ -445,9 +445,13 @@ LIGHTS["cz"] = LIGHTS["kg"]
 # https://developer.tuya.com/en/docs/iot/s?id=K9gf7o5prgf7s
 LIGHTS["pc"] = LIGHTS["kg"]
 
+
 # update the category mapping using the product mapping overrides
 # both tuple should have the same size
-def update_mapping(category_description: tuple[TuyaLightEntityDescription], mapping: tuple[TuyaLightEntityDescription]) -> tuple[TuyaLightEntityDescription]:
+def update_mapping(
+    category_description: tuple[TuyaLightEntityDescription],
+    mapping: tuple[TuyaLightEntityDescription],
+) -> tuple[TuyaLightEntityDescription]:
     m = tuple()
     l = list(category_description)
     for desc in mapping:
@@ -456,19 +460,19 @@ def update_mapping(category_description: tuple[TuyaLightEntityDescription], mapp
             cat_desc = copy.deepcopy(cat_desc)
 
             for key in [
-                        "brightness_max", 
-                        "brightness_min", 
-                        "color_data", 
-                        "color_mode", 
-                        "color_temp", 
-                    ]:
+                "brightness_max",
+                "brightness_min",
+                "color_data",
+                "color_mode",
+                "color_temp",
+            ]:
                 if v := getattr(desc, key):
                     setattr(cat_desc, key, v)
 
             for key in [
-                        "function", 
-                        "status_range", 
-                    ]:
+                "function",
+                "status_range",
+            ]:
                 if v := getattr(desc, key):
                     l = getattr(desc, key)
                     if l:
@@ -478,9 +482,9 @@ def update_mapping(category_description: tuple[TuyaLightEntityDescription], mapp
                     setattr(cat_desc, key, l)
 
             for key in [
-                        "values_overrides", 
-                        "values_defaults", 
-                    ]:
+                "values_overrides",
+                "values_defaults",
+            ]:
                 if v := getattr(desc, key):
                     l = getattr(desc, key)
                     if l:
@@ -495,6 +499,7 @@ def update_mapping(category_description: tuple[TuyaLightEntityDescription], mapp
 
     return m
 
+
 def get_mapping_by_device(device: TuyaBLEDevice) -> tuple[TuyaLightEntityDescription]:
     category_mapping = LIGHTS.get(device.category)
 
@@ -502,7 +507,7 @@ def get_mapping_by_device(device: TuyaBLEDevice) -> tuple[TuyaLightEntityDescrip
     if category is not None:
         product_mapping_overrides = category.get(device.product_id)
         if product_mapping_overrides is not None:
-             return update_mapping(category_mapping, product_mapping_overrides)
+            return update_mapping(category_mapping, product_mapping_overrides)
 
     return category_mapping
 
@@ -529,8 +534,7 @@ class TuyaBLELight(TuyaBLEEntity, LightEntity):
         coordinator: DataUpdateCoordinator,
         device: TuyaBLEDevice,
         product: TuyaBLEProductInfo,
-        description: TuyaLightEntityDescription
-
+        description: TuyaLightEntityDescription,
     ) -> None:
         super().__init__(hass, coordinator, device, product, description)
 
@@ -567,7 +571,10 @@ class TuyaBLELight(TuyaBLEEntity, LightEntity):
 
         if (
             dpcode := self.find_dpcode(description.color_data, prefer_function=True)
-        ) and (self.get_dptype(dpcode) == DPType.JSON or self.get_dptype(dpcode) == DPType.STRING):
+        ) and (
+            self.get_dptype(dpcode) == DPType.JSON
+            or self.get_dptype(dpcode) == DPType.STRING
+        ):
             self._color_data_dpcode = dpcode
             self._attr_supported_color_modes.add(ColorMode.HS)
             if dpcode in self.device.function:
@@ -656,15 +663,9 @@ class TuyaBLELight(TuyaBLEEntity, LightEntity):
             if not (color := kwargs.get(ATTR_HS_COLOR)):
                 color = self.hs_color or (0, 0)
 
-            h = self._color_data_type.h_type.remap_value_from(
-                                    color[0], 0, 360
-                                )
-            s = self._color_data_type.s_type.remap_value_from(
-                                    color[1], 0, 100
-                                )
-            v = self._color_data_type.v_type.remap_value_from(
-                                    brightness
-                                )
+            h = self._color_data_type.h_type.remap_value_from(color[0], 0, 360)
+            s = self._color_data_type.s_type.remap_value_from(color[1], 0, 100)
+            v = self._color_data_type.v_type.remap_value_from(brightness)
 
             # Encoding for RGB from localtuya light component
             if self.__is_color_rgb_encoded():
@@ -682,9 +683,7 @@ class TuyaBLELight(TuyaBLEEntity, LightEntity):
                     round(v),
                 )
             else:
-                colorstr = "{:04x}{:04x}{:04x}".format(
-                    round(h), round(s), round(v)
-                )
+                colorstr = "{:04x}{:04x}{:04x}".format(round(h), round(s), round(v))
 
             commands += [
                 {
@@ -740,7 +739,6 @@ class TuyaBLELight(TuyaBLEEntity, LightEntity):
         """Instruct the light to turn off."""
 
         self._send_command([{"code": self.entity_description.key, "value": False}])
-
 
     @property
     def brightness(self) -> int | None:
@@ -842,11 +840,11 @@ class TuyaBLELight(TuyaBLEEntity, LightEntity):
             s = float(int(status_data[4:8], 16))
             v = float(int(status_data[8:], 16))
             return ColorData(
-                    type_data=self._color_data_type,
-                    h_value=h,
-                    s_value=s,
-                    v_value=v,
-                )
+                type_data=self._color_data_type,
+                h_value=h,
+                s_value=s,
+                v_value=v,
+            )
 
         if len(status_data) > 12:
             # Encoding for RGB devices from localtuya light component
@@ -854,10 +852,10 @@ class TuyaBLELight(TuyaBLEEntity, LightEntity):
             s = int(status_data[10:12], 16)
             v = int(status_data[12:14], 16)
             return ColorData(
-                    type_data=self._color_data_type,
-                    h_value=h,
-                    s_value=s,
-                    v_value=v,
+                type_data=self._color_data_type,
+                h_value=h,
+                s_value=s,
+                v_value=v,
             )
 
         return None
@@ -870,6 +868,7 @@ class TuyaBLELight(TuyaBLEEntity, LightEntity):
             return False
 
         return len(status_data) > 12
+
 
 async def async_setup_entry(
     hass: HomeAssistant,
@@ -884,11 +883,11 @@ async def async_setup_entry(
     for desc in descs:
         entities.append(
             TuyaBLELight(
-                    hass,
-                    data.coordinator,
-                    data.device,
-                    data.product,
-                    desc,
-                )
+                hass,
+                data.coordinator,
+                data.device,
+                data.product,
+                desc,
+            )
         )
     async_add_entities(entities)
