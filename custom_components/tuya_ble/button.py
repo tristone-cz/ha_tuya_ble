@@ -1,4 +1,5 @@
 """The Tuya BLE integration."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field
@@ -73,9 +74,9 @@ mapping: dict[str, TuyaBLECategoryButtonMapping] = {
                     "blliqpsj",
                     "ndvkgsrm",
                     "riecov42",
-                    "yiihr7zh", 
+                    "yiihr7zh",
                     "neq16kgd",
-                    "6jcvqwh0"
+                    "6jcvqwh0",
                 ],  # Fingerbot Plus
                 [
                     TuyaBLEFingerbotModeMapping(dp_id=2),
@@ -100,10 +101,7 @@ mapping: dict[str, TuyaBLECategoryButtonMapping] = {
     "kg": TuyaBLECategoryButtonMapping(
         products={
             **dict.fromkeys(
-                [
-                    "mknd4lci",
-                    "riecov42"
-                ],  # Fingerbot Plus
+                ["mknd4lci", "riecov42"],  # Fingerbot Plus
                 [
                     TuyaBLEFingerbotModeMapping(dp_id=108),
                 ],
@@ -112,8 +110,7 @@ mapping: dict[str, TuyaBLECategoryButtonMapping] = {
     ),
     "znhsb": TuyaBLECategoryButtonMapping(
         products={
-            "cdlandip":  # Smart water bottle
-            [
+            "cdlandip": [  # Smart water bottle
                 TuyaBLEButtonMapping(
                     dp_id=109,
                     description=ButtonEntityDescription(
@@ -125,10 +122,9 @@ mapping: dict[str, TuyaBLECategoryButtonMapping] = {
     ),
     "jtmspro": TuyaBLECategoryButtonMapping(
         products={
-            "xicdxood":  # Raycube K7 Pro+
-            [
+            "xicdxood": [  # Raycube K7 Pro+
                 TuyaBLEButtonMapping(
-                    dp_id=71, # On click it opens the lock, just like connecting via Smart Life App and holding the center button
+                    dp_id=71,  # On click it opens the lock, just like connecting via Smart Life App and holding the center button
                     description=ButtonEntityDescription(
                         key="ble_unlock_check",
                         icon="mdi:lock-open-variant-outline",

@@ -1,4 +1,5 @@
 """Tuya Home Assistant Base Device Model."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -104,6 +105,7 @@ class IntegerTypeData:
             unit=dict.get("unit"),
             type=dict.get("type"),
         )
+
 
 @dataclass
 class EnumTypeData:
