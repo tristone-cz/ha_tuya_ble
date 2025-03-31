@@ -4,7 +4,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 
 import logging
-from typing import Any, Callable
+from typing import Callable
 
 from homeassistant.components.number import (
     NumberEntityDescription,
@@ -18,7 +18,6 @@ from homeassistant.const import (
     UnitOfTemperature,
     UnitOfTime,
     UnitOfVolume,
-    VOLUME_MILLILITERS,
 )
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.entity import EntityCategory

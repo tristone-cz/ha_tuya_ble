@@ -38,7 +38,6 @@ from tuya_iot import (
 
 from .tuya_ble import (
     AbstaractTuyaBLEDeviceManager,
-    TuyaBLEDevice,
     TuyaBLEDeviceCredentials,
 )
 
@@ -63,7 +62,6 @@ from .const import (
     TUYA_API_FACTORY_INFO_URL,
     TUYA_API_DEVICE_SPECIFICATION,
     TUYA_FACTORY_INFO_MAC,
-    SMARTLIFE_APP,
     TUYA_RESPONSE_RESULT,
     TUYA_RESPONSE_SUCCESS,
 )

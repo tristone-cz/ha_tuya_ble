@@ -4,7 +4,6 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 import logging
-from typing import Callable
 
 from homeassistant.components.climate import (
     ClimateEntityDescription,

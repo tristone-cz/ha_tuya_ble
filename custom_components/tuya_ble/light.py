@@ -7,8 +7,7 @@ import logging
 import json
 import copy
 
-from typing import Any, Callable, cast
-from enum import IntEnum, StrEnum, Enum
+from typing import Any, cast
 
 from homeassistant.components.light import (
     ATTR_BRIGHTNESS,
