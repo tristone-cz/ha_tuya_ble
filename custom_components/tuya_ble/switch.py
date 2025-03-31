@@ -448,10 +448,6 @@ mapping: dict[str, TuyaBLECategorySwitchMapping] = {
                     ),
                 ),
             ],
-        },
-    ),
-    "sfkzq": TuyaBLECategorySwitchMapping(
-        products={
             "nxquc5lb": [ # Smart water timer - SOP10
                 TuyaBLEWaterValveSwitchMapping(dp_id=1),
                 TuyaBLEWaterValveWeatherSwitchMapping(dp_id=14),

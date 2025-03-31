@@ -478,10 +478,6 @@ mapping: dict[str, TuyaBLECategorySensorMapping] = {
                     ),
                 ),
             ],
-        },
-    ),
-    "sfkzq": TuyaBLECategorySensorMapping(
-        products={
             "nxquc5lb": [ # Smart water timer - SOP10
                 TuyaBLEBatteryMapping(dp_id=7),
                 TuyaBLEWorkStateMapping(dp_id=12),
