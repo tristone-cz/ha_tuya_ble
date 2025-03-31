@@ -8,16 +8,7 @@ import json
 from typing import Any, Iterable
 
 from homeassistant.core import HomeAssistant
-from homeassistant.components.tuya.const import (
-    CONF_ACCESS_ID,
-    CONF_ACCESS_SECRET,
-    CONF_APP_TYPE,
-    CONF_AUTH_TYPE,
-    CONF_ENDPOINT,
-    DOMAIN as TUYA_DOMAIN,
-    TUYA_RESPONSE_RESULT,
-    TUYA_RESPONSE_SUCCESS,
-)
+
 from homeassistant.helpers.entity import DeviceInfo, EntityDescription
 from homeassistant.helpers.update_coordinator import (
     CoordinatorEntity,
@@ -37,6 +28,12 @@ from .tuya_ble import (
 )
 
 from .const import (
+    TUYA_DOMAIN,
+    CONF_ACCESS_ID,
+    CONF_ACCESS_SECRET,
+    CONF_APP_TYPE,
+    CONF_AUTH_TYPE,
+    CONF_ENDPOINT,
     CONF_PRODUCT_MODEL,
     CONF_UUID,
     CONF_LOCAL_KEY,
@@ -58,6 +55,8 @@ from .const import (
     CONF_ACCESS_SECRET,
     CONF_AUTH_TYPE,
     SMARTLIFE_APP,
+    TUYA_RESPONSE_RESULT,
+    TUYA_RESPONSE_SUCCESS,
 )
 
 _LOGGER = logging.getLogger(__name__)

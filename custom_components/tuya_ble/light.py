@@ -10,12 +10,6 @@ import copy
 from typing import Any, Callable, cast
 from enum import IntEnum, StrEnum, Enum
 
-from homeassistant.components.tuya.const import (
-    DPCode,
-    DPType,
-    WorkMode,
-)
-
 from homeassistant.components.light import (
     ATTR_BRIGHTNESS,
     ATTR_COLOR_TEMP,
@@ -31,7 +25,13 @@ from homeassistant.helpers.entity import EntityCategory
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 
-from .const import DOMAIN
+from .const import (
+    DOMAIN,
+    DPCode,
+    DPType,
+    WorkMode,
+)
+
 from .base import IntegerTypeData
 from .util import remap_value
 from .devices import TuyaBLEData, TuyaBLEEntity, TuyaBLEProductInfo
