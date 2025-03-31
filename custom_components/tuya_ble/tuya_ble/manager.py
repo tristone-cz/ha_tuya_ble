@@ -85,5 +85,5 @@ class AbstaractTuyaBLEDeviceManager(ABC):
                 functions,
                 status_range,
             )
-        else:
-            return None
+
+        return None

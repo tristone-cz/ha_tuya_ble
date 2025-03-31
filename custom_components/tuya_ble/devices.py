@@ -544,8 +544,8 @@ def get_product_info_by_ids(
         if product_info is not None:
             return product_info
         return category_info.info
-    else:
-        return None
+
+    return None
 
 
 def get_device_product_info(device: TuyaBLEDevice) -> TuyaBLEProductInfo | None:

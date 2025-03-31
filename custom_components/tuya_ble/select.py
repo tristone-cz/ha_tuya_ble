@@ -312,10 +312,8 @@ def get_mapping_by_device(
             return product_mapping
         if category.mapping is not None:
             return category.mapping
-        else:
-            return []
-    else:
-        return []
+
+    return []
 
 
 class TuyaBLESelect(TuyaBLEEntity, SelectEntity):
@@ -349,8 +347,8 @@ class TuyaBLESelect(TuyaBLEEntity, SelectEntity):
             value = datapoint.value
             if value >= 0 and value < len(self._attr_options):
                 return self._attr_options[value]
-            else:
-                return value
+
+            return value
         return None
 
     def select_option(self, value: str) -> None:

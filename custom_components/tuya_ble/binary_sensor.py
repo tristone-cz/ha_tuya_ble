@@ -78,10 +78,8 @@ def get_mapping_by_device(device: TuyaBLEDevice) -> list[TuyaBLEBinarySensorMapp
             return product_mapping
         if category.mapping is not None:
             return category.mapping
-        else:
-            return []
-    else:
-        return []
+
+    return []
 
 
 class TuyaBLEBinarySensor(TuyaBLEEntity, BinarySensorEntity):

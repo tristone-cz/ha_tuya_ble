@@ -210,8 +210,8 @@ class TuyaBLEOptionsFlow(OptionsFlowWithConfigEntry):
                             title=self.config_entry.title,
                             data=entry.manager.data,
                         )
-                    else:
-                        errors["base"] = "device_not_registered"
+
+                    errors["base"] = "device_not_registered"
 
         if user_input is None:
             user_input = {}

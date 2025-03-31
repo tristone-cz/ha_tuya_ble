@@ -529,10 +529,9 @@ def get_mapping_by_device(device: TuyaBLEDevice) -> list[TuyaBLESensorMapping]:
             return product_mapping
         if category.mapping is not None:
             return category.mapping
-        else:
-            return []
-    else:
-        return []
+
+    return []
+
 class TuyaBLESensor(TuyaBLEEntity, SensorEntity):
     """Representation of a Tuya BLE sensor."""
     def __init__(

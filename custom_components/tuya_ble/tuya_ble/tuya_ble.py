@@ -108,10 +108,10 @@ class TuyaBLEDataPoint:
             case TuyaBLEDataPointType.DT_ENUM:
                 if self._value > 0xFFFF:
                     return pack(">I", self._value)
-                elif self._value > 0xFF:
+                if self._value > 0xFF:
                     return pack(">H", self._value)
-                else:
-                    return pack(">B", self._value)
+
+                return pack(">B", self._value)
             case TuyaBLEDataPointType.DT_STRING:
                 return self._value.encode()
 
@@ -427,8 +427,8 @@ class TuyaBLEDevice:
         """Get the name of the device."""
         if self._device_info:
             return self._device_info.device_name
-        else:
-            return self._ble_device.name or self._ble_device.address
+
+        return self._ble_device.name or self._ble_device.address
 
     @property
     def rssi(self) -> int | None:
@@ -441,50 +441,50 @@ class TuyaBLEDevice:
     def uuid(self) -> str:
         if self._device_info is not None:
             return self._device_info.uuid
-        else:
-            return ""
+
+        return ""
 
     @property
     def local_key(self) -> str:
         if self._device_info is not None:
             return self._device_info.local_key
-        else:
-            return ""
+
+        return ""
 
     @property
     def category(self) -> str:
         if self._device_info is not None:
             return self._device_info.category
-        else:
-            return ""
+
+        return ""
 
     @property
     def device_id(self) -> str:
         if self._device_info is not None:
             return self._device_info.device_id
-        else:
-            return ""
+
+        return ""
 
     @property
     def product_id(self) -> str:
         if self._device_info is not None:
             return self._device_info.product_id
-        else:
-            return ""
+
+        return ""
 
     @property
     def product_model(self) -> str:
         if self._device_info is not None:
             return self._device_info.product_model
-        else:
-            return ""
+
+        return ""
 
     @property
     def product_name(self) -> str:
         if self._device_info is not None:
             return self._device_info.product_name
-        else:
-            return ""
+
+        return ""
 
     @property
     def function(self) -> dict(str, dict):
@@ -1082,10 +1082,8 @@ class TuyaBLEDevice:
             return self._auth_key
         if security_flag == 4:
             return self._login_key
-        elif security_flag == 5:
+        if security_flag == 5:
             return self._session_key
-        else:
-            pass
 
     def _parse_timestamp(self, data: bytes, start_pos: int) -> tuple(float, int):
         timestamp: float
@@ -1387,7 +1385,8 @@ class TuyaBLEDevice:
             )
             self._clean_input()
             return
-        elif len(self._input_buffer) == self._input_expected_length:
+
+        if len(self._input_buffer) == self._input_expected_length:
             self._parse_input()
 
     async def _send_datapoints_v3(self, datapoint_ids: list[int]) -> None:
