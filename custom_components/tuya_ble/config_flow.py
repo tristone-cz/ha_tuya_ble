@@ -20,8 +20,6 @@ from homeassistant.components.bluetooth import (
 )
 from homeassistant.const import (
     CONF_ADDRESS,
-    CONF_ADDRESS,
-    CONF_DEVICE_ID,
     CONF_COUNTRY_CODE,
     CONF_PASSWORD,
     CONF_USERNAME,
@@ -33,12 +31,8 @@ from homeassistant.components.tuya.const import (
     CONF_ACCESS_ID,
     CONF_ACCESS_SECRET,
     CONF_APP_TYPE,
-    CONF_COUNTRY_CODE,
-    CONF_ENDPOINT,
-    CONF_PASSWORD,
-    CONF_USERNAME,
+    CONF_ENDPOINT,=
     CONF_AUTH_TYPE,
-    CONF_ENDPOINT,
     SMARTLIFE_APP,
     TUYA_COUNTRIES,
     TUYA_RESPONSE_CODE,
