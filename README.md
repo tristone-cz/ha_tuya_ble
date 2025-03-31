@@ -53,6 +53,9 @@ The integration works locally, but connection to Tuya BLE device requires device
   + 2-outlet irrigation computer (product_ids 'hfgdqhho', 'fnlw6npo', 'qycalacn', 'jjqi2syk')
     - also known as: SGW02, SGW08, MOES BWV-YC02-EU-GY, Kogan SmarterHome KASMWATMRDA / KASMWTV2LVA
 
+* Strip Lights (category_id 'dd')
+  + Magiacous RGB light bar (product_id 'nvfrtxlq')
+
 ## Support project
 
 I am working on this integration in Ukraine. Our country was subjected to brutal aggression by Russia. The war still continues. The capital of Ukraine - Kyiv, where I live, and many other cities and villages are constantly under threat of rocket attacks. Our air defense forces are doing wonders, but they also need support. So if you want to help the development of this integration, donate some money and I will spend it to support our air defense.
