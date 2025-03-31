@@ -313,16 +313,20 @@ devices_database: dict[str, TuyaBLECategoryInfo] = {
         products={
             **dict.fromkeys(
             [
-            "nvfrtxlq", 
+            "nvfrtxlq",
             ],  # device product_id
             TuyaBLEProductInfo(
-                name="Strip Lights",
+                name="LGB102 Magic Strip Lights",
+                manufacturer="Magiacous",
 		),
             ),
         },
+        info = TuyaBLEProductInfo(
+                name="Strip Lights",
+		),
+
     ),
 }
-
 
 def get_product_info_by_ids(
     category: str, product_id: str
@@ -400,3 +404,4 @@ def get_device_info(device: TuyaBLEDevice) -> DeviceInfo | None:
         ),
     )
     return result
+
