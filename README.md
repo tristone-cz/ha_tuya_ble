@@ -4,6 +4,9 @@
 
 This integration is an almalgamation of a number of community maintained forks. It should be considered **unstable** quality at this time.
 
+See full list of forks:
+https://github.com/ha-tuya-ble/ha_tuya_ble/issues/1
+
 
 _Inspired by code of [@redphx](https://github.com/redphx/poc-tuya-ble-fingerbot) & forked from https://github.com/PlusPlus-ua/ha_tuya_ble_ 
 
