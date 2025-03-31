@@ -78,7 +78,7 @@ class IntegerTypeData:
     @classmethod
     def from_json(cls, dpcode: DPCode, data: str | dict) -> IntegerTypeData | None:
         """Load JSON string and return a IntegerTypeData object."""
-    
+
         if isinstance(data, str):
             parsed = json.loads(data)
         else:

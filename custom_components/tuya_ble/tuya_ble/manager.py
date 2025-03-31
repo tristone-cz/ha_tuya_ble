@@ -67,8 +67,8 @@ class AbstaractTuyaBLEDeviceManager(ABC):
     ) -> TuyaBLEDeviceCredentials | None:
         """Checks and creates credentials of the Tuya BLE device."""
         if (
-            uuid and 
-            local_key and 
+            uuid and
+            local_key and
             device_id and
             category and
             product_id

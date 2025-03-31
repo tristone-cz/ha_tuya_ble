@@ -124,7 +124,7 @@ class TuyaBLEEntity(CoordinatorEntity):
                 )
             self._hass.create_task(datapoint.set_value(value))
 
-    
+
     def _send_command(self, commands : list[dict[str, Any]]) -> None:
         """Send the commands to the device"""
         for command in commands:
@@ -453,12 +453,12 @@ devices_database: dict[str, TuyaBLECategoryInfo] = {
     "wk": TuyaBLECategoryInfo(
         products={
             **dict.fromkeys(
-            [
-            "drlajpqc", 
-            "nhj2j7su",
-            ],  # device product_id
-            TuyaBLEProductInfo(  
-                name="Thermostatic Radiator Valve",
+                [
+                    "drlajpqc", 
+                    "nhj2j7su",
+                ],  # device product_id
+                TuyaBLEProductInfo(
+                    name="Thermostatic Radiator Valve",
                 ),
             ),
         },
@@ -502,7 +502,7 @@ devices_database: dict[str, TuyaBLECategoryInfo] = {
                     "fnlw6npo",
                     "jjqi2syk",
                 ],  # device product_ids
-                TuyaBLEProductInfo( 
+                TuyaBLEProductInfo(
                     name="Irrigation computer",
                 ),
             ),

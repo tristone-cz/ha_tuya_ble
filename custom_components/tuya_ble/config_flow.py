@@ -19,7 +19,7 @@ from homeassistant.components.bluetooth import (
     async_discovered_service_info,
 )
 from homeassistant.const import (
-    CONF_ADDRESS, 
+    CONF_ADDRESS,
     CONF_DEVICE_ID,
     CONF_COUNTRY_CODE,
     CONF_PASSWORD,
