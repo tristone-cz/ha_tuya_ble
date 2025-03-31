@@ -7,6 +7,7 @@ import secrets
 import time
 from collections.abc import Callable
 from struct import pack, unpack
+from dataclasses import dataclass
 
 from bleak.backends.device import BLEDevice
 from bleak.backends.scanner import AdvertisementData
@@ -20,6 +21,10 @@ from bleak_retry_connector import (
     establish_connection,
 )
 from Crypto.Cipher import AES
+
+from homeassistant.components.tuya.const import (
+    DPType,
+)
 
 from .const import (
     CHARACTERISTIC_NOTIFY,
@@ -117,6 +122,12 @@ class TuyaBLEDataPoint:
     def changed_by_device(self) -> bool:
         return self._changed_by_device
 
+    def __repr__(self): 
+        return f"{{id:{self.id} type:{self.type} value:{self.value}}}"
+
+    def __str__(self):
+        return f"{self}"
+
     async def set_value(self, value: bytes | bool | int | str) -> None:
         match self._type:
             case TuyaBLEDataPointType.DT_RAW | TuyaBLEDataPointType.DT_BITMAP:
@@ -207,6 +218,12 @@ class TuyaBLEDataPoints:
 
 global_connect_lock = asyncio.Lock()
 
+@dataclass
+class TuyaBLEDeviceFunction:
+    code: str
+    dp_id: int 
+    type: DPType
+    values: str | None
 
 class TuyaBLEDevice:
     def __init__(
@@ -256,6 +273,10 @@ class TuyaBLEDevice:
 
         self._datapoints = TuyaBLEDataPoints(self)
 
+        self._function = {}
+        self._status_range = {}
+
+
     def set_ble_device_and_advertisement_data(
         self, ble_device: BLEDevice, advertisement_data: AdvertisementData
     ) -> None:
@@ -303,7 +324,23 @@ class TuyaBLEDevice:
                 self._local_key = self._device_info.local_key[:6].encode()
                 self._login_key = hashlib.md5(self._local_key).digest()
 
+                self.append_functions(self._device_info.functions, self._device_info.status_range)
+
         return self._device_info is not None
+
+    def append_functions(self, function: List[dict], status_range: List[dict]) -> None:
+        if function:
+            for f in function:
+                dpcode = f.get("code")
+                if dpcode:
+                    self._function[dpcode] = TuyaBLEDeviceFunction(**f)
+
+        if status_range:
+            for f in status_range:
+                dpcode = f.get("code")
+                if dpcode:
+                    self._status_range[dpcode] = TuyaBLEDeviceFunction(**f)
+
 
     def _decode_advertisement_data(self) -> None:
         raw_product_id: bytes | None = None
@@ -404,11 +441,12 @@ class TuyaBLEDevice:
             return ""
 
     @property
-    def device_functions(self) -> List[Dict]:
-        if self._device_info is not None:
-            return self._device_info.functions
-        else:
-            return []
+    def function(self) -> Dict(str, Dict):
+        return self._function
+
+    @property
+    def status_range(self) -> Dict(str, Dict):
+        return self._status_range
 
     @property
     def device_version(self) -> str:
@@ -426,6 +464,23 @@ class TuyaBLEDevice:
     def datapoints(self) -> TuyaBLEDataPoints:
         """Get datapoints exposed by device."""
         return self._datapoints
+
+    @property
+    def status(self) -> Dict[str, Any]:
+        """Get current datapoints values."""
+
+        result = {}
+        dps = self.datapoints._datapoints
+        if dps:
+            order = [self.status_range, self.function]
+            for functions in order:
+                for dpcode in functions:
+                    f = functions[dpcode]
+                    dpid = f.dp_id
+                    v = dps.get(dpid)
+                    if v:
+                        result[dpcode] = v.value
+        return result
 
     def get_or_create_datapoint(
         self,
