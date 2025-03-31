@@ -261,7 +261,7 @@
           "name": "Irrigation valve - Zone 2"
       },
       "weather_switch": {
-        "name": "Weather switch"
+          "name": "Weather switch"
       }
     },
     "text": {

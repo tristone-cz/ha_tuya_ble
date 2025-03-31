@@ -19,10 +19,9 @@ from homeassistant.const import (
     UnitOfTime,
     UnitOfVolume,
 )
-from homeassistant.core import HomeAssistant, callback
+from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity import EntityCategory
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
-from homeassistant.helpers.restore_state import RestoreEntity
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 
 from .const import DOMAIN
