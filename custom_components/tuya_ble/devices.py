@@ -1,4 +1,5 @@
 """The Tuya BLE integration."""
+
 from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any
@@ -55,6 +56,7 @@ class TuyaBLEFingerbotInfo:
     manual_control: int = 0
     program: int = 0
 
+
 @dataclass
 class TuyaBLEWaterValveInfo:
     switch: bool
@@ -63,12 +65,14 @@ class TuyaBLEWaterValveInfo:
     smart_weather: str
     use_time: int
 
+
 @dataclass
 class TuyaBLEProductInfo:
     name: str
     manufacturer: str = DEVICE_DEF_MANUFACTURER
     fingerbot: TuyaBLEFingerbotInfo | None = None
     watervalve: TuyaBLEWaterValveInfo | None = None
+
 
 class TuyaBLEEntity(CoordinatorEntity):
     """Tuya BLE base entity."""
@@ -111,22 +115,23 @@ class TuyaBLEEntity(CoordinatorEntity):
         """Handle updated data from the coordinator."""
         self.async_write_ha_state()
 
-    def send_dp_value(self,
+    def send_dp_value(
+        self,
         key: DPCode | None,
         type: TuyaBLEDataPointType,
-        value: bytes | bool | int | str | None = None) -> None:
+        value: bytes | bool | int | str | None = None,
+    ) -> None:
 
         dpid = self.find_dpid(key)
         if dpid is not None:
             datapoint = self._device.datapoints.get_or_create(
-                    dpid,
-                    type,
-                    value,
-                )
+                dpid,
+                type,
+                value,
+            )
             self._hass.create_task(datapoint.set_value(value))
 
-
-    def _send_command(self, commands : list[dict[str, Any]]) -> None:
+    def _send_command(self, commands: list[dict[str, Any]]) -> None:
         """Send the commands to the device"""
         for command in commands:
             code = command.get("code")
@@ -144,14 +149,17 @@ class TuyaBLEEntity(CoordinatorEntity):
                         if isinstance(self.device.function[code].values, dict):
                             range = self.device.function[code].values.get("range")
                             if isinstance(range, list):
-                                int_value = range.index(value) if value in range else None
-                        self.send_dp_value(code, TuyaBLEDataPointType.DT_ENUM, int_value)
+                                int_value = (
+                                    range.index(value) if value in range else None
+                                )
+                        self.send_dp_value(
+                            code, TuyaBLEDataPointType.DT_ENUM, int_value
+                        )
 
                 elif isinstance(value, bool):
                     self.send_dp_value(code, TuyaBLEDataPointType.DT_BOOL, value)
                 else:
                     self.send_dp_value(code, TuyaBLEDataPointType.DT_VALUE, value)
-
 
     def find_dpid(
         self, dpcode: DPCode | None, prefer_function: bool = False
@@ -227,7 +235,6 @@ class TuyaBLEEntity(CoordinatorEntity):
 
         return None
 
-
     def get_dptype(
         self, dpcode: DPCode | None, prefer_function: bool = False
     ) -> DPType | None:
@@ -243,8 +250,6 @@ class TuyaBLEEntity(CoordinatorEntity):
                 return DPType(getattr(self.device, key)[dpcode].type)
 
         return None
-
-
 
 
 class TuyaBLECoordinator(DataUpdateCoordinator[None]):
@@ -338,12 +343,8 @@ devices_database: dict[str, TuyaBLECategoryInfo] = {
     "ms": TuyaBLECategoryInfo(
         products={
             **dict.fromkeys(
-                [
-                    "ludzroix",
-                    "isk2p555",
-                    "uamrw6h3"
-                ],
-                    TuyaBLEProductInfo(  # device product_id
+                ["ludzroix", "isk2p555", "uamrw6h3"],
+                TuyaBLEProductInfo(  # device product_id
                     name="Smart Lock",
                 ),
             ),
@@ -384,10 +385,9 @@ devices_database: dict[str, TuyaBLECategoryInfo] = {
                 [
                     "blliqpsj",
                     "ndvkgsrm",
-                    "yiihr7zh", 
+                    "yiihr7zh",
                     "neq16kgd",
-                    "6jcvqwh0"
-                    "riecov42",
+                    "6jcvqwh0" "riecov42",
                 ],  # device product_ids
                 TuyaBLEProductInfo(
                     name="Fingerbot Plus",
@@ -431,10 +431,7 @@ devices_database: dict[str, TuyaBLECategoryInfo] = {
     "kg": TuyaBLECategoryInfo(
         products={
             **dict.fromkeys(
-                [
-                    "mknd4lci",
-                    "riecov42"
-                ],  # device product_ids
+                ["mknd4lci", "riecov42"],  # device product_ids
                 TuyaBLEProductInfo(
                     name="Fingerbot Plus",
                     fingerbot=TuyaBLEFingerbotInfo(
@@ -455,7 +452,7 @@ devices_database: dict[str, TuyaBLECategoryInfo] = {
         products={
             **dict.fromkeys(
                 [
-                    "drlajpqc", 
+                    "drlajpqc",
                     "nhj2j7su",
                 ],  # device product_id
                 TuyaBLEProductInfo(
@@ -473,16 +470,14 @@ devices_database: dict[str, TuyaBLECategoryInfo] = {
     ),
     "znhsb": TuyaBLECategoryInfo(
         products={
-            "cdlandip":  # device product_id
-            TuyaBLEProductInfo(
+            "cdlandip": TuyaBLEProductInfo(  # device product_id
                 name="Smart water bottle",
             ),
         },
     ),
     "sfkzq": TuyaBLECategoryInfo(
         products={
-            "0axr5s0b":  # device product_id
-            TuyaBLEProductInfo(
+            "0axr5s0b": TuyaBLEProductInfo(  # device product_id
                 name="Valve controller",
             ),
             "nxquc5lb": TuyaBLEProductInfo(
@@ -492,7 +487,7 @@ devices_database: dict[str, TuyaBLECategoryInfo] = {
                     countdown=8,
                     weather_delay=10,
                     smart_weather=13,
-                    use_time=9
+                    use_time=9,
                 ),
             ),
         },
@@ -501,7 +496,7 @@ devices_database: dict[str, TuyaBLECategoryInfo] = {
         products={
             **dict.fromkeys(
                 [
-                    "6pahkcau", 
+                    "6pahkcau",
                     "hfgdqhho",
                     "qycalacn",
                     "fnlw6npo",
@@ -516,21 +511,21 @@ devices_database: dict[str, TuyaBLECategoryInfo] = {
     "dd": TuyaBLECategoryInfo(
         products={
             **dict.fromkeys(
-            [
-              "nvfrtxlq",
-            ],  # device product_id
-            TuyaBLEProductInfo(
-                name="LGB102 Magic Strip Lights",
-                manufacturer="Magiacous",
-		),
+                [
+                    "nvfrtxlq",
+                ],  # device product_id
+                TuyaBLEProductInfo(
+                    name="LGB102 Magic Strip Lights",
+                    manufacturer="Magiacous",
+                ),
             ),
         },
-        info = TuyaBLEProductInfo(
-                name="Strip Lights",
-		),
-
+        info=TuyaBLEProductInfo(
+            name="Strip Lights",
+        ),
     ),
 }
+
 
 def get_product_info_by_ids(
     category: str, product_id: str
