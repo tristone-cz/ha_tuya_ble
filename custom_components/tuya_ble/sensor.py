@@ -270,7 +270,8 @@ mapping: dict[str, TuyaBLECategorySensorMapping] = {
                     "ndvkgsrm",
                     "yiihr7zh",
                     "neq16kgd",
-                    "6jcvqwh0" "riecov42",
+                    "6jcvqwh0",
+                    "riecov42",
                 ],  # Fingerbot Plus
                 [
                     TuyaBLEBatteryMapping(dp_id=12),

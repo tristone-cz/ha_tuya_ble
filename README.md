@@ -2,9 +2,9 @@
 
 ## Overview
 
-This integration supports Tuya devices connected via BLE.
+This integration supports Tuya devices connected via BLE and adds bs3ubslo for my local install. Forked from @kancelott
 
-_Inspired by code of [@redphx](https://github.com/redphx/poc-tuya-ble-fingerbot)_
+_Inspired by code of [@redphx](https://github.com/redphx/poc-tuya-ble-fingerbot) & forked from https://github.com/PlusPlus-ua/ha_tuya_ble_ 
 
 ## Installation
 
@@ -23,7 +23,7 @@ The integration works locally, but connection to Tuya BLE device requires device
 * Fingerbots (category_id 'szjqr')
   + Fingerbot (product_ids 'ltak7e1p', 'y6kttvd6', 'yrnk7mnn', 'nvr2rocq', 'bnt7wajf', 'rvdceqjh', '5xhbk964'), original device, first in category, powered by CR2 battery.
   + Adaprox Fingerbot (product_id 'y6kttvd6'), built-in battery with USB type C charging.
-  + Fingerbot Plus (product_ids 'blliqpsj', 'ndvkgsrm', 'yiihr7zh', 'neq16kgd'), almost same as original, has sensor button for manual control.
+  + Fingerbot Plus (product_ids 'blliqpsj', 'ndvkgsrm', 'yiihr7zh', 'neq16kgd', 'mknd4lci', 'riecov42', 'bs3ubslo'), almost same as original, has sensor button for manual control.
   + CubeTouch 1s (product_id '3yqdo5yt'), built-in battery with USB type C charging.
   + CubeTouch II (product_id 'xhf790if'), built-in battery with USB type C charging.
 
@@ -62,11 +62,10 @@ The integration works locally, but connection to Tuya BLE device requires device
 * Water valve (category_id 'sfkzq')
   + Water valve (product_id 'nxquc5lb')
 
-## Support project
+## Note that the original hasn't been updated in a long time, still, Support original developer @PlusPlus-ua:
 
 I am working on this integration in Ukraine. Our country was subjected to brutal aggression by Russia. The war still continues. The capital of Ukraine - Kyiv, where I live, and many other cities and villages are constantly under threat of rocket attacks. Our air defense forces are doing wonders, but they also need support. So if you want to help the development of this integration, donate some money and I will spend it to support our air defense.
 <br><br>
 <p align="center">
   <a href="https://www.buymeacoffee.com/3PaK6lXr4l"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy me an air defense"></a>
 </p>
-
