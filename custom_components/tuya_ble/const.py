@@ -44,6 +44,14 @@ TUYA_DOMAIN: Final = "tuya"
 TUYA_SMART_APP: Final = "tuyaSmart"
 SMARTLIFE_APP: Final = "smartlife"
 
+CONF_AUTH_TYPE = "auth_type"
+CONF_PROJECT_TYPE = "tuya_project_type"
+CONF_ENDPOINT = "endpoint"
+CONF_ACCESS_ID = "access_id"
+CONF_ACCESS_SECRET = "access_secret"
+SMARTLIFE_APP = "smartlife"
+TUYA_SMART_APP = "tuyaSmart"
+
 TUYA_API_DEVICES_URL: Final = "/v1.0/users/%s/devices"
 TUYA_API_FACTORY_INFO_URL: Final = "/v1.0/iot-03/devices/factory-infos?device_ids=%s"
 TUYA_API_DEVICE_SPECIFICATION: Final = "/v1.1/devices/%s/specifications"
@@ -73,16 +81,6 @@ class WorkMode(StrEnum):
     SCENE = "scene"
     WHITE = "white"
 
-
-class DPType(StrEnum):
-    """Data point types."""
-
-    BOOLEAN = "Boolean"
-    ENUM = "Enum"
-    INTEGER = "Integer"
-    JSON = "Json"
-    RAW = "Raw"
-    STRING = "String"
 
 @dataclass
 class Country:
@@ -338,7 +336,6 @@ TUYA_COUNTRIES = [
     Country("Zambia", "260", TuyaCloudOpenAPIEndpoint.EUROPE),
     Country("Zimbabwe", "263", TuyaCloudOpenAPIEndpoint.EUROPE),
 ]
-
 class DPType(StrEnum):
     """Data point types."""
 
@@ -629,5 +626,6 @@ class DPCode(StrEnum):
     WIRELESS_ELECTRICITY = "wireless_electricity"
     WORK_MODE = "work_mode"  # Working mode
     WORK_POWER = "work_power"
+
 
 
