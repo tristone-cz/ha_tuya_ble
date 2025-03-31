@@ -14,13 +14,8 @@ from homeassistant.components.light import (
     ATTR_BRIGHTNESS,
     ATTR_COLOR_TEMP,
     ATTR_HS_COLOR,
-    ATTR_EFFECT,
-    ATTR_RGB_COLOR,
-    ATTR_WHITE,
-    ATTR_COLOR_MODE,
     ColorMode,
     LightEntity,
-    LightEntityFeature,
     LightEntityDescription,
 )
 
@@ -74,6 +69,24 @@ DEFAULT_COLOR_TYPE_DATA_V2 = ColorTypeData(
 @dataclass
 class ColorData:
     """Color Data."""
+
+    type_data: ColorTypeData
+    h_value: int
+    s_value: int
+    v_value: int
+
+    @property
+    def hs_color(self) -> tuple[float, float]:
+        """Get the HS value from this color data."""
+        return (
+            self.type_data.h_type.remap_value_to(self.h_value, 0, 360),
+            self.type_data.s_type.remap_value_to(self.s_value, 0, 100),
+        )
+
+    @property
+    def brightness(self) -> int:
+        """Get the brightness value from this color data."""
+        return round(self.type_data.v_type.remap_value_to(self.v_value, 0, 255))
 
     type_data: ColorTypeData
     h_value: int
@@ -852,6 +865,96 @@ class TuyaBLELight(TuyaBLEEntity, LightEntity):
             )
 
         if len(status_data) > 12:
+            # Encoding for RGB devices from localtuya light component
+            h = int(status_data[6:10], 16)
+            s = int(status_data[10:12], 16)
+            v = int(status_data[12:14], 16)
+            return ColorData(
+                type_data=self._color_data_type,
+                h_value=h,
+                s_value=s,
+                v_value=v,
+            )
+
+        return None
+
+    def __is_color_rgb_encoded(self):
+        if not (status_data := self.device.status[self._color_data_dpcode]):
+            return False
+
+        if not (isinstance(status_data, str)):
+            return False
+
+        return len(status_data) > 12
+
+        return round(brightness)
+
+    @property
+    def color_temp(self) -> int | None:
+        """Return the color_temp of the light."""
+        if not self._color_temp:
+            return None
+
+        temperature = self._device.status.get(self._color_temp.dpcode)
+        if temperature is None:
+            return None
+
+        return round(
+            self._color_temp.remap_value_to(
+                temperature, self.min_mireds, self.max_mireds, reverse=True
+            )
+        )
+
+    @property
+    def hs_color(self) -> tuple[float, float] | None:
+        """Return the hs_color of the light."""
+        if self._color_data_dpcode is None or not (
+            color_data := self._get_color_data()
+        ):
+            return None
+        return color_data.hs_color
+
+    @property
+    def color_mode(self) -> ColorMode:
+        """Return the color_mode of the light."""
+        # We consider it to be in HS color mode, when work mode is anything
+        # else than "white".
+        if (
+            self._color_mode_dpcode
+            and self.device.status.get(self._color_mode_dpcode) != WorkMode.WHITE
+        ):
+            return ColorMode.HS
+        if self._color_temp:
+            return ColorMode.COLOR_TEMP
+        if self._brightness:
+            return ColorMode.BRIGHTNESS
+        return ColorMode.ONOFF
+
+    def _get_color_data(self) -> ColorData | None:
+        """Get current color data from device."""
+        if (
+            self._color_data_type is None
+            or self._color_data_dpcode is None
+            or self._color_data_dpcode not in self.device.status
+        ):
+            return None
+
+        if not (status_data := self.device.status[self._color_data_dpcode]):
+            return None
+
+        #!! Color encoding is different from the cloud Light compoonent
+        #!! not sure that the encoding is the same for all light categories
+        if len(status_data) == 12:
+            h = float(int(status_data[:4], 16))
+            s = float(int(status_data[4:8], 16))
+            v = float(int(status_data[8:], 16))
+            return ColorData(
+                type_data=self._color_data_type,
+                h_value=h,
+                s_value=s,
+                v_value=v,
+            )
+        elif len(status_data) > 12:
             # Encoding for RGB devices from localtuya light component
             h = int(status_data[6:10], 16)
             s = int(status_data[10:12], 16)

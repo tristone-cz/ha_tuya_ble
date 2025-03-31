@@ -25,6 +25,11 @@ from bleak_retry_connector import (
 )
 from Crypto.Cipher import AES
 
+from homeassistant.components.tuya.const import (
+    DPCode,
+    DPType,
+)
+
 from .const import (
     CHARACTERISTIC_NOTIFY,
     CHARACTERISTIC_WRITE,
@@ -53,6 +58,19 @@ _LOGGER = logging.getLogger(__name__)
 
 
 BLEAK_EXCEPTIONS = (*BLEAK_RETRY_EXCEPTIONS, OSError)
+
+
+# @dataclass
+class TuyaBLEEntityDescription:
+    # Added to info that we get from the cloud
+    function: list[dict[str, dict]] | None = None
+    status_range: list[dict[str, dict]] | None = None
+
+    # Replace the values that we got from the cloud
+    values_overrides: dict[str, dict] | None = None
+
+    # Values if nothing was set from the cloud
+    values_defaults: dict[str, dict] | None = None
 
 
 # @dataclass
@@ -251,6 +269,21 @@ class TuyaBLEDeviceFunction:
         super().__setattr__(name, value)
 
 
+@dataclass
+class TuyaBLEDeviceFunction:
+    code: str
+    dp_id: int
+    type: DPType
+    values: str | dict | list | None
+
+    def __setattr__(self, name: str, value: str | dict | list | None):
+        if name == "values":
+            # string values are JSON representations of the actual values
+            if isinstance(value, str) and (v := json.loads(value)):
+                value = v
+        super().__setattr__(name, value)
+
+
 class TuyaBLEDevice:
     def __init__(
         self,
@@ -360,7 +393,6 @@ class TuyaBLEDevice:
                 dpcode = f.get("code")
                 if dpcode:
                     self.function[dpcode] = TuyaBLEDeviceFunction(**f)
-
             for f in status_range:
                 dpcode = f.get("code")
                 if dpcode:
@@ -369,7 +401,6 @@ class TuyaBLEDevice:
     def update_description(self, description: TuyaBLEEntityDescription | None) -> None:
         if not description:
             return
-
         self.append_functions(description.function, description.status_range)
 
         if description.values_overrides:
@@ -488,6 +519,14 @@ class TuyaBLEDevice:
             return self._device_info.product_name
 
         return ""
+
+    @property
+    def function(self) -> dict(str, dict):
+        return self._function
+
+    @property
+    def status_range(self) -> dict(str, dict):
+        return self._status_range
 
     @property
     def function(self) -> dict(str, dict):

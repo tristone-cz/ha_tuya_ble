@@ -227,6 +227,22 @@ class HASSTuyaBLEDeviceManager(AbstaractTuyaBLEDeviceManager):
                                 if status:
                                     item.credentials[mac][CONF_STATUS_RANGE] = status
 
+                            spec_response = await self._hass.async_add_executor_job(
+                                item.api.get,
+                                TUYA_API_DEVICE_SPECIFICATION % device.get("id"),
+                            )
+
+                            spec_response_result = spec_response.get(
+                                TUYA_RESPONSE_RESULT
+                            )
+                            if spec_response_result:
+                                functions = spec_response_result.get("functions")
+                                if functions:
+                                    item.credentials[mac][CONF_FUNCTIONS] = functions
+                                status = spec_response_result.get("status")
+                                if status:
+                                    item.credentials[mac][CONF_STATUS_RANGE] = status
+
     async def build_cache(self) -> None:
         global _cache
         data = {}
