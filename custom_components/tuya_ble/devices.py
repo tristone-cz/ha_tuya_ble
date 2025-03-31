@@ -611,4 +611,3 @@ def get_device_info(device: TuyaBLEDevice) -> DeviceInfo | None:
         ),
     )
     return result
-

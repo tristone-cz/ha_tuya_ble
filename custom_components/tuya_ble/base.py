@@ -127,4 +127,3 @@ class EnumTypeData:
         if not (parsed := json.loads(data)):
             return None
         return cls(dpcode, **parsed)
-
