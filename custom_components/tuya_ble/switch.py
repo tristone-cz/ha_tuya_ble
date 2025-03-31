@@ -1,4 +1,5 @@
 """The Tuya BLE integration."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field
@@ -28,14 +29,10 @@ TuyaBLESwitchGetter = (
 )
 
 
-TuyaBLESwitchIsAvailable = (
-    Callable[["TuyaBLESwitch", TuyaBLEProductInfo], bool] | None
-)
+TuyaBLESwitchIsAvailable = Callable[["TuyaBLESwitch", TuyaBLEProductInfo], bool] | None
 
 
-TuyaBLESwitchSetter = (
-    Callable[["TuyaBLESwitch", TuyaBLEProductInfo, bool], None] | None
-)
+TuyaBLESwitchSetter = Callable[["TuyaBLESwitch", TuyaBLEProductInfo, bool], None] | None
 
 
 @dataclass
@@ -71,6 +68,7 @@ def is_fingerbot_in_switch_mode(
             result = datapoint.value == 1
     return result
 
+
 def is_water_valve_in_switch_mode(
     self: TuyaBLESwitch, product: TuyaBLEProductInfo
 ) -> bool:
@@ -78,6 +76,7 @@ def is_water_valve_in_switch_mode(
     if product.watervalve:
         result = True
     return result
+
 
 def get_fingerbot_program_repeat_forever(
     self: TuyaBLESwitch, product: TuyaBLEProductInfo
@@ -98,8 +97,7 @@ def set_fingerbot_program_repeat_forever(
         datapoint = self._device.datapoints[product.fingerbot.program]
         if datapoint and type(datapoint.value) is bytes:
             new_value = (
-                int.to_bytes(0xFFFF if value else 1, 2, "big") +
-                datapoint.value[2:]
+                int.to_bytes(0xFFFF if value else 1, 2, "big") + datapoint.value[2:]
             )
             self._hass.create_task(datapoint.set_value(new_value))
 
@@ -112,6 +110,7 @@ class TuyaBLEFingerbotSwitchMapping(TuyaBLESwitchMapping):
         )
     )
     is_available: TuyaBLESwitchIsAvailable = is_fingerbot_in_switch_mode
+
 
 @dataclass
 class TuyaBLEWaterValveSwitchMapping(TuyaBLESwitchMapping):
@@ -131,6 +130,7 @@ class TuyaBLEWaterValveWeatherSwitchMapping(TuyaBLESwitchMapping):
             icon="mdi:cloud-question",
         )
     )
+
 
 @dataclass
 class TuyaBLEReversePositionsMapping(TuyaBLESwitchMapping):
@@ -188,7 +188,7 @@ mapping: dict[str, TuyaBLECategorySwitchMapping] = {
     "ms": TuyaBLECategorySwitchMapping(
         products={
             **dict.fromkeys(
-                ["ludzroix", "isk2p555"], # Smart Lock
+                ["ludzroix", "isk2p555"],  # Smart Lock
                 [
                     TuyaBLESwitchMapping(
                         dp_id=47,
@@ -196,10 +196,10 @@ mapping: dict[str, TuyaBLECategorySwitchMapping] = {
                             key="lock_motor_state",
                         ),
                     ),
-                ]
+                ],
             ),
             **dict.fromkeys(
-                ["uamrw6h3"], #Smart Fechadura Positivo
+                ["uamrw6h3"],  # Smart Fechadura Positivo
                 [
                     TuyaBLESwitchMapping(
                         dp_id=47,
@@ -213,7 +213,7 @@ mapping: dict[str, TuyaBLECategorySwitchMapping] = {
                             key="manual_lock",
                         ),
                     ),
-                ]
+                ],
             ),
         }
     ),
@@ -287,10 +287,7 @@ mapping: dict[str, TuyaBLECategorySwitchMapping] = {
     "kg": TuyaBLECategorySwitchMapping(
         products={
             **dict.fromkeys(
-                [
-                    "mknd4lci",
-                    "riecov42"
-                ],  # Fingerbot Plus
+                ["mknd4lci", "riecov42"],  # Fingerbot Plus
                 [
                     TuyaBLEFingerbotSwitchMapping(dp_id=1),
                     TuyaBLEReversePositionsMapping(dp_id=104),
@@ -448,7 +445,7 @@ mapping: dict[str, TuyaBLECategorySwitchMapping] = {
                     ),
                 ),
             ],
-            "nxquc5lb": [ # Smart water timer - SOP10
+            "nxquc5lb": [  # Smart water timer - SOP10
                 TuyaBLEWaterValveSwitchMapping(dp_id=1),
                 TuyaBLEWaterValveWeatherSwitchMapping(dp_id=14),
             ],
