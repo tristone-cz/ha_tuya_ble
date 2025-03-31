@@ -1,4 +1,5 @@
 """The Tuya BLE integration."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field
@@ -35,9 +36,7 @@ TuyaBLENumberGetter = (
 )
 
 
-TuyaBLENumberIsAvailable = (
-    Callable[["TuyaBLENumber", TuyaBLEProductInfo], bool] | None
-)
+TuyaBLENumberIsAvailable = Callable[["TuyaBLENumber", TuyaBLEProductInfo], bool] | None
 
 
 TuyaBLENumberSetter = (
@@ -134,10 +133,7 @@ def set_fingerbot_program_repeat_count(
     if product.fingerbot and product.fingerbot.program:
         datapoint = self._device.datapoints[product.fingerbot.program]
         if datapoint and type(datapoint.value) is bytes:
-            new_value = (
-                int.to_bytes(int(value), 2, "big") +
-                datapoint.value[2:]
-            )
+            new_value = int.to_bytes(int(value), 2, "big") + datapoint.value[2:]
             self._hass.create_task(datapoint.set_value(new_value))
 
 
@@ -354,10 +350,7 @@ mapping: dict[str, TuyaBLECategoryNumberMapping] = {
     "kg": TuyaBLECategoryNumberMapping(
         products={
             **dict.fromkeys(
-                [
-                    "mknd4lci",
-                    "riecov42"
-                ],  # Fingerbot Plus
+                ["mknd4lci", "riecov42"],  # Fingerbot Plus
                 [
                     TuyaBLENumberMapping(
                         dp_id=102,
@@ -447,8 +440,7 @@ mapping: dict[str, TuyaBLECategoryNumberMapping] = {
     ),
     "znhsb": TuyaBLECategoryNumberMapping(
         products={
-            "cdlandip":  # Smart water bottle
-            [
+            "cdlandip": [  # Smart water bottle
                 TuyaBLENumberMapping(
                     dp_id=103,
                     description=NumberEntityDescription(
@@ -552,7 +544,7 @@ mapping: dict[str, TuyaBLECategoryNumberMapping] = {
                     ),
                 ),
             ],
-            "nxquc5lb": [ # Smart water timer - SOP10
+            "nxquc5lb": [  # Smart water timer - SOP10
                 TuyaBLENumberMapping(
                     dp_id=11,
                     description=NumberEntityDescription(
