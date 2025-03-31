@@ -347,7 +347,7 @@ devices_database: dict[str, TuyaBLECategoryInfo] = {
     "ms": TuyaBLECategoryInfo(
         products={
             **dict.fromkeys(
-                ["ludzroix", "isk2p555", "uamrw6h3"],
+                ["ludzroix", "isk2p555", "uamrw6h3", "okkyfgfs"],
                 TuyaBLEProductInfo(  # device product_id
                     name="Smart Lock",
                 ),
@@ -558,6 +558,18 @@ devices_database: dict[str, TuyaBLECategoryInfo] = {
         info=TuyaBLEProductInfo(
             name="Strip Lights",
         ),
+    ),
+    "cl": TuyaBLECategoryInfo(
+        products={
+            **dict.fromkeys(
+                [
+                    "4pbr8eig",
+                ],  # device product_id
+                TuyaBLEProductInfo(
+                    name="Rope Blind Motor",
+                ),
+            )
+        },
     ),
 }
 
