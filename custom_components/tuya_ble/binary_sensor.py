@@ -68,10 +68,10 @@ mapping: dict[str, TuyaBLECategoryBinarySensorMapping] = {
             ],
         },
     ),
-     "ms": TuyaBLECategoryBinarySensorMapping(
+    "ms": TuyaBLECategoryBinarySensorMapping(
         products={
             **dict.fromkeys(
-                ["okkyfgfs"], # Smart Lock
+                ["okkyfgfs"],  # Smart Lock
                 [
                     TuyaBLEBinarySensorMapping(
                         dp_id=47,
@@ -79,7 +79,7 @@ mapping: dict[str, TuyaBLECategoryBinarySensorMapping] = {
                             key="lock_motor_state",
                         ),
                     ),
-                ]
+                ],
             ),
         }
     ),
