@@ -102,7 +102,7 @@ class TuyaLightEntityDescription(
     color_temp: DPCode | tuple[DPCode, ...] | None = None
     default_color_type: ColorTypeData = field(
         default_factory=lambda: DEFAULT_COLOR_TYPE_DATA
-    )
+    ) 
 
 
 # You can add here description for device for which automatic capabilities setting
@@ -128,6 +128,7 @@ ProductsMapping: dict[str, dict[str, tuple[TuyaLightEntityDescription, ...]]] = 
             TuyaLightEntityDescription(
                 key= "", # just override the category description from these set keys 
                 values_overrides={
+                    # So we still get the right enum values if the product isn't set to DP mode in the cloud settings
                     DPCode.WORK_MODE : {
                         "range" : {
                             WorkMode.COLOUR,
@@ -540,8 +541,8 @@ class TuyaBLELight(TuyaBLEEntity, LightEntity):
         # Update/override the device info from our description
         device.update_description(description)
 
-        _LOGGER.warning(device.function)
-
+        _LOGGER.debug("%s : sunctions: %s", device.name, device.function)
+        
         # Determine DPCodes
         self._color_mode_dpcode = self.find_dpcode(
             description.color_mode, prefer_function=True
@@ -567,7 +568,7 @@ class TuyaBLELight(TuyaBLEEntity, LightEntity):
 
         if (
             dpcode := self.find_dpcode(description.color_data, prefer_function=True)
-        ) and self.get_dptype(dpcode) == DPType.JSON:
+        ) and (self.get_dptype(dpcode) == DPType.JSON or self.get_dptype(dpcode) == DPType.STRING):
             self._color_data_dpcode = dpcode
             self._attr_supported_color_modes.add(ColorMode.HS)
             if dpcode in self.device.function:
@@ -580,7 +581,7 @@ class TuyaBLELight(TuyaBLEEntity, LightEntity):
                 function_data = json.loads(function_data)
 
             # Fetch color data type information
-            if function_data:
+            if function_data and function_data.get("h"):
                 self._color_data_type = ColorTypeData(
                     h_type=IntegerTypeData(dpcode, **function_data["h"]),
                     s_type=IntegerTypeData(dpcode, **function_data["s"]),
@@ -665,12 +666,33 @@ class TuyaBLELight(TuyaBLEEntity, LightEntity):
             v = self._color_data_type.v_type.remap_value_from(
                                     brightness
                                 )
+
+            # Encoding for RGB from localtuya light component
+            if self.__is_color_rgb_encoded():
+                rgb = color_util.color_hsv_to_RGB(
+                    color[0],
+                    color[1],
+                    int(brightness),
+                )
+                colorstr = "{:02x}{:02x}{:02x}{:04x}{:02x}{:02x}".format(
+                    round(rgb[0]),
+                    round(rgb[1]),
+                    round(rgb[2]),
+                    round(h),
+                    round(s),
+                    round(v),
+                )
+            else:
+                colorstr = "{:04x}{:04x}{:04x}".format(
+                    round(h), round(s), round(v)
+                )
+
             commands += [
                 {
                     "code": self._color_data_dpcode,
                     #!! Color encoding is different from the cloud Light compoonent
                     #!! not sure that the encoding is the same for all light categories
-                    "value": ("%04X" % int(h)) + ("%04X" % int(s)) + ("%04X" % int(v)),
+                    "value": colorstr,
                 },
             ]
 
@@ -826,9 +848,28 @@ class TuyaBLELight(TuyaBLEEntity, LightEntity):
                     s_value=s,
                     v_value=v,
                 )   
+        elif len(status_data) > 12:
+            # Encoding for RGB devices from localtuya light component
+            h = int(status_data[6:10], 16)
+            s = int(status_data[10:12], 16)
+            v = int(status_data[12:14], 16)
+            return ColorData(
+                    type_data=self._color_data_type,
+                    h_value=h,
+                    s_value=s,
+                    v_value=v,
+            )
 
         return None
 
+    def __is_color_rgb_encoded(self):
+        if not (status_data := self.device.status[self._color_data_dpcode]):
+            return False
+
+        if not (isinstance(status_data, str)):
+            return False
+
+        return len(status_data) > 12
 
 async def async_setup_entry(
     hass: HomeAssistant,
