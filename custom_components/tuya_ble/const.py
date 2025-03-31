@@ -5,9 +5,6 @@ from dataclasses import dataclass
 from tuya_iot import TuyaCloudOpenAPIEndpoint
 from typing_extensions import Final
 
-from tuya_iot import TuyaCloudOpenAPIEndpoint
-
-from dataclasses import dataclass
 
 DOMAIN: Final = "tuya_ble"
 

@@ -23,6 +23,7 @@ from home_assistant_bluetooth import BluetoothServiceInfoBleak
 from .tuya_ble import (
     AbstaractTuyaBLEDeviceManager,
     TuyaBLEDataPoint,
+    TuyaBLEDataPointType,
     TuyaBLEDevice,
     TuyaBLEDeviceCredentials,
 )
@@ -38,7 +39,7 @@ from .const import (
 )
 
 from .base import IntegerTypeData, EnumTypeData
-from .tuya_ble import TuyaBLEDataPointType, TuyaBLEDevice
+
 
 _LOGGER = logging.getLogger(__name__)
 
