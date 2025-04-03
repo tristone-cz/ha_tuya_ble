@@ -524,8 +524,11 @@ def get_mapping_by_device(device: TuyaBLEDevice) -> tuple[TuyaLightEntityDescrip
     category = ProductsMapping.get(device.category)
     if category is not None:
         product_mapping_overrides = category.get(device.product_id)
-        if product_mapping_overrides is not None:
+        if product_mapping_overrides is not None and category_mapping is not None:
             return update_mapping(category_mapping, product_mapping_overrides)
+
+    if category_mapping is None:
+        _LOGGER.debug("Could not find light with device.category " + device.category)
 
     return category_mapping
 
