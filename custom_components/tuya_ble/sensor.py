@@ -115,6 +115,14 @@ class TuyaBLEWorkStateMapping(TuyaBLESensorMapping):
 
 
 mapping: dict[str, TuyaBLECategorySensorMapping] = {
+    "sfkzq": TuyaBLECategorySensorMapping(
+        products={
+            "nxquc5lb":  # CO2 Detector
+            [
+                TuyaBLEBatteryMapping(dp_id=7),
+            ]
+        }
+    ),
     "co2bj": TuyaBLECategorySensorMapping(
         products={
             "59s19z5m": [  # CO2 Detector
