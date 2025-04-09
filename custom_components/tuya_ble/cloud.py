@@ -51,6 +51,7 @@ from .const import (
     TUYA_FACTORY_INFO_MAC,
     TUYA_RESPONSE_RESULT,
     TUYA_RESPONSE_SUCCESS,
+    SMARTLIFE_APP,
 )
 
 _LOGGER = logging.getLogger(__name__)
