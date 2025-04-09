@@ -126,7 +126,7 @@ mapping: dict[str, TuyaBLECategoryButtonMapping] = {
                 TuyaBLEButtonMapping(
                     dp_id=71,  # On click it opens the lock, just like connecting via Smart Life App and holding the center button
                     description=ButtonEntityDescription(
-                        key="ble_unlock_check",
+                        key="bluetooth_unlock",
                         icon="mdi:lock-open-variant-outline",
                     ),
                 ),
