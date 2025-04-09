@@ -412,7 +412,7 @@ mapping: dict[str, TuyaBLECategorySwitchMapping] = {
     ),
     "ggq": TuyaBLECategorySwitchMapping(
         products={
-            "6pahkcau": [  # Irrigation computer
+            "6pahkcau": [  # Irrigation computer PARKSIDE PPB A1
                 TuyaBLESwitchMapping(
                     dp_id=1,
                     description=SwitchEntityDescription(
@@ -461,32 +461,6 @@ mapping: dict[str, TuyaBLECategorySwitchMapping] = {
             "nxquc5lb": [  # Smart water timer - SOP10
                 TuyaBLEWaterValveSwitchMapping(dp_id=1),
                 TuyaBLEWaterValveWeatherSwitchMapping(dp_id=14),
-            ],
-        },
-    ),
-    "sfkzq": TuyaBLECategorySwitchMapping(
-        products={
-            "nxquc5lb": [  # Smart water timer - SOP10
-                TuyaBLESwitchMapping(
-                    dp_id=1,
-                    description=SwitchEntityDescription(
-                        key="water_valve",
-                        entity_registry_enabled_default=True,
-                    ),
-                ),
-            ],
-        },
-    ),
-    "sfkzq": TuyaBLECategorySwitchMapping(
-        products={
-            "nxquc5lb": [  # Smart water timer - SOP10
-                TuyaBLESwitchMapping(
-                    dp_id=1,
-                    description=SwitchEntityDescription(
-                        key="water_valve",
-                        entity_registry_enabled_default=True,
-                    ),
-                ),
             ],
         },
     ),
