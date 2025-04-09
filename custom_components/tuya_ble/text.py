@@ -156,7 +156,7 @@ mapping: dict[str, TuyaBLECategoryTextMapping] = {
                         getter=get_fingerbot_program,
                         setter=set_fingerbot_program,
                     ),
-                ]
+                ],
             ),
         },
     ),

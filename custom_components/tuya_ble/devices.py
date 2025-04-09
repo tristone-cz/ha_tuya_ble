@@ -78,6 +78,7 @@ class TuyaBLEProductInfo:
     watervalve: TuyaBLEWaterValveInfo | None = None
     lock: int | None = None
 
+
 class TuyaBLEEntity(CoordinatorEntity):
     """Tuya BLE base entity."""
 
@@ -536,10 +537,7 @@ devices_database: dict[str, TuyaBLECategoryInfo] = {
     "ggq": TuyaBLECategoryInfo(
         products={
             **dict.fromkeys(
-                [
-                    "6pahkcau",  # PPB A1
-                    "hfgdqhho"   # SGW08
-                ],  # device product_id
+                ["6pahkcau", "hfgdqhho"],  # PPB A1  # SGW08  # device product_id
                 TuyaBLEProductInfo(
                     name="Irrigation computer",
                 ),

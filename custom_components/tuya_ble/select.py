@@ -103,8 +103,7 @@ class TuyaBLECategorySelectMapping:
 mapping: dict[str, TuyaBLECategorySelectMapping] = {
     "sfkzq": TuyaBLECategorySelectMapping(
         products={
-            "nxquc5lb":  # Smart Water Valve
-            [
+            "nxquc5lb": [  # Smart Water Valve
                 TuyaBLESelectMapping(
                     dp_id=10,
                     description=SelectEntityDescription(
@@ -139,7 +138,13 @@ mapping: dict[str, TuyaBLECategorySelectMapping] = {
     "ms": TuyaBLECategorySelectMapping(
         products={
             **dict.fromkeys(
-                ["ludzroix", "isk2p555", "gumrixyt", "uamrw6h3", "okkyfgfs"],  # Smart Lock
+                [
+                    "ludzroix",
+                    "isk2p555",
+                    "gumrixyt",
+                    "uamrw6h3",
+                    "okkyfgfs",
+                ],  # Smart Lock
                 [
                     TuyaBLESelectMapping(
                         dp_id=31,
@@ -264,8 +269,7 @@ mapping: dict[str, TuyaBLECategorySelectMapping] = {
                     ),
                 ),
             ],
-            "vlzqwckk":
-            [
+            "vlzqwckk": [
                 TuyaBLESelectMapping(
                     dp_id=9,
                     description=TemperatureUnitDescription(
@@ -274,7 +278,7 @@ mapping: dict[str, TuyaBLECategorySelectMapping] = {
                             UnitOfTemperature.FAHRENHEIT,
                         ],
                         entity_registry_enabled_default=False,
-                    )
+                    ),
                 ),
             ],
         },
@@ -307,8 +311,7 @@ mapping: dict[str, TuyaBLECategorySelectMapping] = {
     ),
     "znhsb": TuyaBLECategorySelectMapping(
         products={
-            "cdlandip":  # Smart water bottle
-            [
+            "cdlandip": [  # Smart water bottle
                 TuyaBLESelectMapping(
                     dp_id=106,
                     description=TemperatureUnitDescription(
@@ -316,7 +319,7 @@ mapping: dict[str, TuyaBLECategorySelectMapping] = {
                             UnitOfTemperature.CELSIUS,
                             UnitOfTemperature.FAHRENHEIT,
                         ],
-                    )
+                    ),
                 ),
                 TuyaBLESelectMapping(
                     dp_id=107,
