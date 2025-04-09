@@ -53,6 +53,7 @@ class TuyaBLEFingerbotModeMapping(TuyaBLEButtonMapping):
     )
     is_available: TuyaBLEButtonIsAvailable = is_fingerbot_in_push_mode
 
+
 @dataclass
 class TuyaBLELockMapping(TuyaBLEButtonMapping):
     description: ButtonEntityDescription = field(
@@ -61,6 +62,7 @@ class TuyaBLELockMapping(TuyaBLEButtonMapping):
         )
     )
     is_available: TuyaBLEButtonIsAvailable = 0
+
 
 @dataclass
 class TuyaBLECategoryButtonMapping:
@@ -200,7 +202,7 @@ class TuyaBLEButton(TuyaBLEEntity, ButtonEntity):
         )
         if datapoint:
             if self._product.lock:
-                #Lock needs true to activate lock/unlock commands
+                # Lock needs true to activate lock/unlock commands
                 self._hass.create_task(datapoint.set_value(True))
             else:
                 self._hass.create_task(datapoint.set_value(not bool(datapoint.value)))

@@ -157,7 +157,13 @@ mapping: dict[str, TuyaBLECategorySensorMapping] = {
     "ms": TuyaBLECategorySensorMapping(
         products={
             **dict.fromkeys(
-                ["ludzroix", "isk2p555",  "gumrixyt", "uamrw6h3", "okkyfgfs"],  # Smart Lock
+                [
+                    "ludzroix",
+                    "isk2p555",
+                    "gumrixyt",
+                    "uamrw6h3",
+                    "okkyfgfs",
+                ],  # Smart Lock
                 [
                     TuyaBLESensorMapping(
                         dp_id=21,
@@ -432,7 +438,6 @@ mapping: dict[str, TuyaBLECategorySensorMapping] = {
                     ),
                 ),
             ],
-
         },
     ),
     "zwjcy": TuyaBLECategorySensorMapping(
@@ -489,7 +494,6 @@ mapping: dict[str, TuyaBLECategorySensorMapping] = {
             ],
         },
     ),
-
     "znhsb": TuyaBLECategorySensorMapping(
         products={
             "cdlandip": [  # Smart water bottle
@@ -579,7 +583,6 @@ mapping: dict[str, TuyaBLECategorySensorMapping] = {
                     ),
                 ),
             ],
-
             "hfgdqhho": [  # Irrigation computer - SGW02/SGW08
                 TuyaBLEBatteryMapping(dp_id=11),
                 TuyaBLESensorMapping(
