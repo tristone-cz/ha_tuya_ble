@@ -467,6 +467,7 @@ devices_database: dict[str, TuyaBLECategoryInfo] = {
                 [
                     "drlajpqc",
                     "nhj2j7su",
+                    "zmachryv",
                 ],  # device product_id
                 TuyaBLEProductInfo(
                     name="Thermostatic Radiator Valve",
