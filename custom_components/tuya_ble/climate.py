@@ -70,8 +70,9 @@ mapping: dict[str, TuyaBLECategoryClimateMapping] = {
         products={
             **dict.fromkeys(
                 [
-                    "drlajpqc",
+                    "drlajpqc", 
                     "nhj2j7su",
+                    "zmachryv",
                 ],  # Thermostatic Radiator Valve
                 [
                     # Thermostatic Radiator Valve
@@ -117,7 +118,7 @@ mapping: dict[str, TuyaBLECategoryClimateMapping] = {
                         hvac_switch_mode=HVACMode.HEAT,
                         hvac_modes=[HVACMode.OFF, HVACMode.HEAT],
                         preset_mode_dp_ids={PRESET_AWAY: 106, PRESET_NONE: 106},
-                        current_temperature_dp_id=102,
+                        current_temperature_dp_id=102, # Merge conflict: current_temperature_dp_id=2 for zmachryv?
                         current_temperature_coefficient=10.0,
                         target_temperature_coefficient=10.0,
                         target_temperature_step=0.5,
