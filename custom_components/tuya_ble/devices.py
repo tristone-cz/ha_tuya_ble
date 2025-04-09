@@ -76,7 +76,7 @@ class TuyaBLEProductInfo:
     manufacturer: str = DEVICE_DEF_MANUFACTURER
     fingerbot: TuyaBLEFingerbotInfo | None = None
     watervalve: TuyaBLEWaterValveInfo | None = None
-
+    lock: int | None = None
 
 class TuyaBLEEntity(CoordinatorEntity):
     """Tuya BLE base entity."""
@@ -337,14 +337,6 @@ class TuyaBLECategoryInfo:
 
 
 devices_database: dict[str, TuyaBLECategoryInfo] = {
-    "sfkzq": TuyaBLECategoryInfo(
-        products={
-            "nxquc5lb":  # device product_id
-            TuyaBLEProductInfo(
-                name="Smart Water Valve",
-            ),
-        },
-    ),
     "co2bj": TuyaBLECategoryInfo(
         products={
             "59s19z5m": TuyaBLEProductInfo(  # device product_id
@@ -355,10 +347,14 @@ devices_database: dict[str, TuyaBLECategoryInfo] = {
     "ms": TuyaBLECategoryInfo(
         products={
             **dict.fromkeys(
-                ["ludzroix", "isk2p555", "gumrixyt", "uamrw6h3", "okkyfgfs"],
+                ["ludzroix", "isk2p555", "gumrixyt", "uamrw6h3"],
                 TuyaBLEProductInfo(  # device product_id
                     name="Smart Lock",
                 ),
+            ),
+            "okkyfgfs": TuyaBLEProductInfo(
+                name="TEKXDD Fingerprint Smart Lock",
+                lock=1,
             ),
         },
     ),
@@ -486,6 +482,12 @@ devices_database: dict[str, TuyaBLECategoryInfo] = {
             "tv6peegl": TuyaBLEProductInfo(  # new device product_id
                 name="Soil Thermo-Hygrometer",
             ),
+            "iv7hudlj": TuyaBLEProductInfo(
+                name="Bluetooth Temperature Humidity Sensor",
+            ),
+            "vlzqwckk": TuyaBLEProductInfo(
+                name="Temperature Humidity Sensor",
+            ),
         },
     ),
     "znhsb": TuyaBLECategoryInfo(
@@ -525,11 +527,7 @@ devices_database: dict[str, TuyaBLECategoryInfo] = {
                 TuyaBLEProductInfo(
                     name="Irrigation computer",
                 ),
-            )
-        },
-    ),
-    "sfkzq": TuyaBLECategoryInfo(
-        products={
+            ),
             "nxquc5lb": TuyaBLEProductInfo(  # device product_id
                 name="Water valve controller",
             ),
@@ -546,13 +544,6 @@ devices_database: dict[str, TuyaBLECategoryInfo] = {
                     name="Irrigation computer",
                 ),
             )
-        },
-    ),
-    "sfkzq": TuyaBLECategoryInfo(
-        products={
-            "nxquc5lb": TuyaBLEProductInfo(  # device product_id
-                name="Water valve controller",
-            ),
         },
     ),
     "dd": TuyaBLECategoryInfo(

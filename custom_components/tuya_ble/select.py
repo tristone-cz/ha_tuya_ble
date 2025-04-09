@@ -264,6 +264,19 @@ mapping: dict[str, TuyaBLECategorySelectMapping] = {
                     ),
                 ),
             ],
+            "vlzqwckk":
+            [
+                TuyaBLESelectMapping(
+                    dp_id=9,
+                    description=TemperatureUnitDescription(
+                        options=[
+                            UnitOfTemperature.CELSIUS,
+                            UnitOfTemperature.FAHRENHEIT,
+                        ],
+                        entity_registry_enabled_default=False,
+                    )
+                ),
+            ],
         },
     ),
     "znhsb": TuyaBLECategorySelectMapping(
@@ -285,6 +298,32 @@ mapping: dict[str, TuyaBLECategorySelectMapping] = {
                         options=[
                             "interval_reminder",
                             "schedule_reminder",
+                        ],
+                        entity_category=EntityCategory.CONFIG,
+                    ),
+                ),
+            ],
+        },
+    ),
+    "znhsb": TuyaBLECategorySelectMapping(
+        products={
+            "cdlandip":  # Smart water bottle
+            [
+                TuyaBLESelectMapping(
+                    dp_id=106,
+                    description=TemperatureUnitDescription(
+                        options=[
+                            UnitOfTemperature.CELSIUS,
+                            UnitOfTemperature.FAHRENHEIT,
+                        ],
+                    )
+                ),
+                TuyaBLESelectMapping(
+                    dp_id=107,
+                    description=SelectEntityDescription(
+                        key="reminder_mode",
+                        options=[
+                            "interval_reminder",
                             "alarm_reminder",
                         ],
                         entity_category=EntityCategory.CONFIG,

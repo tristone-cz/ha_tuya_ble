@@ -10,6 +10,11 @@ https://github.com/ha-tuya-ble/ha_tuya_ble/issues/1
 
 _Inspired by code of [@redphx](https://github.com/redphx/poc-tuya-ble-fingerbot) & forked from https://github.com/PlusPlus-ua/ha_tuya_ble_ 
 
+_Original HASS component forked from https://github.com/PlusPlus-ua/ha_tuya_ble_
+
+_This forks base is from https://github.com/markusg1234/ha_tuya_ble_
+
+
 ## Installation
 
 Place the `custom_components` folder in your configuration directory (or add its contents to an existing `custom_components` folder). Alternatively install via [HACS](https://hacs.xyz/).
@@ -22,7 +27,7 @@ After adding to Home Assistant integration should discover all supported Bluetoo
 
 The integration works locally, but connection to Tuya BLE device requires device ID and encryption key from Tuya IOT cloud. It could be obtained using the same credentials as in the previous official Tuya integration. To obtain the credentials, please refer to official Tuya integration [documentation](https://web.archive.org/web/20231228044831/https://www.home-assistant.io/integrations/tuya/) [[1]](https://github.com/home-assistant/home-assistant.io/blob/a4e6d4819f1db584cc66ba2082508d3978f83f7e/source/_integrations/tuya.markdown)
 
-## Supported devices list
+## Supported devices list (not up to date)
 
 * Fingerbots (category_id 'szjqr')
   + Fingerbot (product_ids 'ltak7e1p', 'y6kttvd6', 'yrnk7mnn', 'nvr2rocq', 'bnt7wajf', 'rvdceqjh', '5xhbk964'), original device, first in category, powered by CR2 battery.
