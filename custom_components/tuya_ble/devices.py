@@ -341,7 +341,7 @@ devices_database: dict[str, TuyaBLECategoryInfo] = {
         products={
             "nxquc5lb":  # device product_id
             TuyaBLEProductInfo(
-                name="Smart Water Timer",
+                name="Smart Water Valve",
             ),
         },
     ),
