@@ -103,7 +103,7 @@ mapping: dict[str, TuyaBLECategoryClimateMapping] = {
                     # - [ ] 121 - Historical data (Month-motor opening degree)
                     # - [ ] 122 - Historical data (Year-motor opening degree)
                     # - [ ] 123 - Programming data (Monday)
-                    # - [ ] 124 - Programming data (Tuesday)
+                    # - [ ] 124 - Programming data (Tuseday)
                     # - [ ] 125 - Programming data (Wednesday)
                     # - [ ] 126 - Programming data (Thursday)
                     # - [ ] 127 - Programming data (Friday)
@@ -118,11 +118,11 @@ mapping: dict[str, TuyaBLECategoryClimateMapping] = {
                         hvac_switch_mode=HVACMode.HEAT,
                         hvac_modes=[HVACMode.OFF, HVACMode.HEAT],
                         preset_mode_dp_ids={PRESET_AWAY: 106, PRESET_NONE: 106},
-                        current_temperature_dp_id=102, # Merge conflict: current_temperature_dp_id=2 for zmachryv?
+                        current_temperature_dp_id=102, # Merge conflict: current_temperature_dp_id=3 for zmachryv?
                         current_temperature_coefficient=10.0,
                         target_temperature_coefficient=10.0,
                         target_temperature_step=0.5,
-                        target_temperature_dp_id=103,
+                        target_temperature_dp_id=103, # Merge conflict: current_temperature_dp_id=2 for zmachryv?
                         target_temperature_min=5.0,
                         target_temperature_max=30.0,
                     ),
@@ -198,7 +198,7 @@ class TuyaBLEClimate(TuyaBLEEntity, ClimateEntity):
             datapoint = self._device.datapoints[self._mapping.target_temperature_dp_id]
             if datapoint:
                 self._attr_target_temperature = (
-                    datapoint.value / self._mapping.target_temperature_coefficient
+                    datapoint.value * self._mapping.target_temperature_step
                 )
 
         if self._mapping.current_humidity_dp_id != 0:
@@ -257,8 +257,9 @@ class TuyaBLEClimate(TuyaBLEEntity, ClimateEntity):
         """Set new target temperature."""
         if self._mapping.target_temperature_dp_id != 0:
             int_value = int(
-                kwargs["temperature"] * self._mapping.target_temperature_coefficient
+                kwargs["temperature"] * 2
             )
+            _LOGGER.error(int_value)
             datapoint = self._device.datapoints.get_or_create(
                 self._mapping.target_temperature_dp_id,
                 TuyaBLEDataPointType.DT_VALUE,
