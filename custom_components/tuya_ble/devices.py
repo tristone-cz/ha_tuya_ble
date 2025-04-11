@@ -310,8 +310,9 @@ devices_database: dict[str, TuyaBLECategoryInfo] = {
         products={
             **dict.fromkeys(
                 [
-                "6pahkcau", 
+                "6pahkcau",
                 "hfgdqhho",
+                "fnlw6npo",
                 ],  # device product_id
                 TuyaBLEProductInfo( 
                     name="Irrigation computer",
