@@ -989,6 +989,10 @@ async def async_setup_entry(
     """Set up the Tuya BLE sensors."""
     data: TuyaBLEData = hass.data[DOMAIN][entry.entry_id]
     descs = get_mapping_by_device(data.device)
+
+    if descs is None:
+        return None
+
     entities: list[TuyaBLELight] = []
 
     for desc in descs:
