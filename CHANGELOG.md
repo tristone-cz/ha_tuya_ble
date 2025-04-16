@@ -4,10 +4,6 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog],
 and this project adheres to [Semantic Versioning].
-## [0.2.1] - 2025-03-26
-
-Home assistant 202503
-
 ## [0.1.0] - 2023-04-22
 
 - Initial release
@@ -104,3 +100,24 @@ Home assistant 202503
 
 - fix: Compatibility with HA 2024.1
 - Fix deprecated
+
+## [0.2.1] - 2025-03-26
+
+### Added
+
+- Add ggq/hfgdqhho device
+
+### Fixed
+
+- fix: Compatibility with HA 2025.3
+- Fix deprecated
+
+## [0.2.2] - 2025-04-16
+
+### Fixed
+
+- Fix deprecated with Home assistant 2025.4.2
+
+### Update
+
+- Update README about device support
