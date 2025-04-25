@@ -146,7 +146,7 @@ class HASSTuyaBLEDeviceManager(AbstaractTuyaBLEDeviceManager):
             _LOGGER.debug("Successful login for %s", data[CONF_USERNAME])
             if add_to_cache:
                 auth_type = data[CONF_AUTH_TYPE]
-                if type(auth_type) is AuthType:
+                if isinstance(auth_type, AuthType):
                     data[CONF_AUTH_TYPE] = auth_type.value
                 cache_key = self._get_cache_key(data)
                 cache_item = _cache.get(cache_key)
