@@ -367,6 +367,13 @@ devices_database: dict[str, TuyaBLECategoryInfo] = {
             ),
         },
     ),
+    "jtmspro": TuyaBLECategoryInfo(
+        products={
+            "ebd5e0uauqx0vfsp": TuyaBLEProductInfo(  # device product_id
+                name="CentralAcesso",
+            ),
+        },
+    ),
     "szjqr": TuyaBLECategoryInfo(
         products={
             "3yqdo5yt": TuyaBLEProductInfo(  # device product_id
@@ -391,6 +398,7 @@ devices_database: dict[str, TuyaBLECategoryInfo] = {
                     reverse_positions=4,
                 ),
             ),
+            
             **dict.fromkeys(
                 [
                     "blliqpsj",
