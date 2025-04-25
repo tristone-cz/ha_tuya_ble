@@ -6,7 +6,7 @@ import hashlib
 import logging
 import secrets
 import time
-from collections.abc import Callable
+from collections.abc import Callable, Hashable
 from struct import pack, unpack
 from dataclasses import dataclass
 from typing import Any
@@ -55,6 +55,7 @@ from .exceptions import (
     TuyaBLEEnumValueError,
 )
 from .manager import AbstaractTuyaBLEDeviceManager, TuyaBLEDeviceCredentials
+
 
 _LOGGER = logging.getLogger(__name__)
 

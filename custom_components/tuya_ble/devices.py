@@ -129,7 +129,7 @@ class TuyaBLEEntity(CoordinatorEntity):
     def send_dp_value(
         self,
         key: DPCode | None,
-        type: TuyaBLEDataPointType,
+        dp_type: TuyaBLEDataPointType,
         value: bytes | bool | int | str | None = None,
     ) -> None:
 
@@ -137,7 +137,7 @@ class TuyaBLEEntity(CoordinatorEntity):
         if dpid is not None:
             datapoint = self._device.datapoints.get_or_create(
                 dpid,
-                type,
+                dp_type,
                 value,
             )
             self._hass.create_task(datapoint.set_value(value))
