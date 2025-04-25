@@ -32,6 +32,7 @@ _LOGGER = logging.getLogger(__name__)
 @dataclass
 class TuyaBLESelectMapping:
     """Model a DP, description and default values"""
+
     dp_id: int
     description: SelectEntityDescription
     force_add: bool = True
@@ -314,7 +315,7 @@ mapping: dict[str, TuyaBLECategorySelectMapping] = {
                         key="reminder_mode",
                         options=[
                             "interval_reminder",
-                            "alarm_reminder", # TODO: schedule_reminder?
+                            "alarm_reminder",  # TODO: schedule_reminder?
                         ],
                         entity_category=EntityCategory.CONFIG,
                     ),

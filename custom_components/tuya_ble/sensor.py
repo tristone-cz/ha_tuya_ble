@@ -45,6 +45,7 @@ TuyaBLESensorIsAvailable = Callable[["TuyaBLESensor", TuyaBLEProductInfo], bool]
 @dataclass
 class TuyaBLESensorMapping:
     """Model a DP, description and default values"""
+
     dp_id: int
     description: SensorEntityDescription
     force_add: bool = True
@@ -99,6 +100,7 @@ def battery_enum_getter(self: TuyaBLESensor) -> None:
 @dataclass
 class TuyaBLECategorySensorMapping:
     """Models a dict of products and their mappings"""
+
     products: dict[str, list[TuyaBLESensorMapping]] | None = None
     mapping: list[TuyaBLESensorMapping] | None = None
 

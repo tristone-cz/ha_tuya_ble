@@ -40,6 +40,7 @@ class TuyaCoverState(IntEnum):
 @dataclass
 class TuyaBLECoverMapping:
     """Model a DP, description and default values"""
+
     description: CoverEntityDescription
 
     cover_state_dp_id: int = 0
@@ -56,6 +57,7 @@ class TuyaBLECoverMapping:
 @dataclass
 class TuyaBLECategoryCoverMapping:
     """Models a dict of products and their mappings"""
+
     products: dict[str, list[TuyaBLECoverMapping]] | None = None
     mapping: list[TuyaBLECoverMapping] | None = None
 

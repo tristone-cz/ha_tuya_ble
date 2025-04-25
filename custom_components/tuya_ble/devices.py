@@ -334,6 +334,7 @@ class TuyaBLEData:
 @dataclass
 class TuyaBLECategoryInfo:
     """Defines category info"""
+
     products: dict[str, TuyaBLEProductInfo]
     info: TuyaBLEProductInfo | None = None
 
@@ -398,7 +399,6 @@ devices_database: dict[str, TuyaBLECategoryInfo] = {
                     reverse_positions=4,
                 ),
             ),
-            
             **dict.fromkeys(
                 [
                     "blliqpsj",

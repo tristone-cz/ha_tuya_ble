@@ -38,6 +38,7 @@ TuyaBLESwitchSetter = Callable[["TuyaBLESwitch", TuyaBLEProductInfo, bool], None
 @dataclass
 class TuyaBLESwitchMapping:
     """Model a DP, description and default values"""
+
     dp_id: int
     description: SwitchEntityDescription
     force_add: bool = True
@@ -148,6 +149,7 @@ class TuyaBLEReversePositionsMapping(TuyaBLESwitchMapping):
 @dataclass
 class TuyaBLECategorySwitchMapping:
     """Models a dict of products and their mappings"""
+
     products: dict[str, list[TuyaBLESwitchMapping]] | None = None
     mapping: list[TuyaBLESwitchMapping] | None = None
 

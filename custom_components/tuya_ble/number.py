@@ -47,6 +47,7 @@ TuyaBLENumberSetter = (
 @dataclass
 class TuyaBLENumberMapping:
     """Model a DP, description and default values"""
+
     dp_id: int
     description: NumberEntityDescription
     force_add: bool = True
@@ -208,6 +209,7 @@ class TuyaBLEHoldTimeMapping(TuyaBLENumberMapping):
 @dataclass
 class TuyaBLECategoryNumberMapping:
     """Models a dict of products and their mappings"""
+
     products: dict[str, list[TuyaBLENumberMapping]] | None = None
     mapping: list[TuyaBLENumberMapping] | None = None
 

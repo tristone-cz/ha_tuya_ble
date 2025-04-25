@@ -95,6 +95,7 @@ def set_fingerbot_program(
 @dataclass
 class TuyaBLETextMapping:
     """Model a DP, description and default values"""
+
     dp_id: int
     description: TextEntityDescription
     force_add: bool = True
@@ -108,6 +109,7 @@ class TuyaBLETextMapping:
 @dataclass
 class TuyaBLECategoryTextMapping:
     """Models a dict of products and their mappings"""
+
     products: dict[str, list[TuyaBLETextMapping]] | None = None
     mapping: list[TuyaBLETextMapping] | None = None
 
