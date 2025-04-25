@@ -47,6 +47,7 @@ def is_fingerbot_in_push_mode(self: TuyaBLEButton, product: TuyaBLEProductInfo) 
 
 @dataclass
 class TuyaBLEFingerbotModeMapping(TuyaBLEButtonMapping):
+    """Describes availability of a given button"""
     description: ButtonEntityDescription = field(
         default_factory=lambda: ButtonEntityDescription(
             key="push",
@@ -57,6 +58,7 @@ class TuyaBLEFingerbotModeMapping(TuyaBLEButtonMapping):
 
 @dataclass
 class TuyaBLELockMapping(TuyaBLEButtonMapping):
+    """Describes availability of a given button"""
     description: ButtonEntityDescription = field(
         default_factory=lambda: ButtonEntityDescription(
             key="push",
@@ -67,6 +69,7 @@ class TuyaBLELockMapping(TuyaBLEButtonMapping):
 
 @dataclass
 class TuyaBLECategoryButtonMapping:
+    """Describes a dict of products and their mappings"""
     products: dict[str, list[TuyaBLEButtonMapping]] | None = None
     mapping: list[TuyaBLEButtonMapping] | None = None
 
