@@ -42,6 +42,14 @@ TUYA_DOMAIN: Final = "tuya"
 TUYA_SMART_APP: Final = "tuyaSmart"
 SMARTLIFE_APP: Final = "smartlife"
 
+CONF_AUTH_TYPE = "auth_type"
+CONF_PROJECT_TYPE = "tuya_project_type"
+CONF_ENDPOINT = "endpoint"
+CONF_ACCESS_ID = "access_id"
+CONF_ACCESS_SECRET = "access_secret"
+SMARTLIFE_APP = "smartlife"
+TUYA_SMART_APP = "tuyaSmart"
+
 TUYA_API_DEVICES_URL: Final = "/v1.0/users/%s/devices"
 TUYA_API_FACTORY_INFO_URL: Final = "/v1.0/iot-03/devices/factory-infos?device_ids=%s"
 TUYA_API_DEVICE_SPECIFICATION: Final = "/v1.1/devices/%s/specifications"
@@ -63,6 +71,7 @@ FINGERBOT_MODE_SWITCH: Final = "switch"
 FINGERBOT_MODE_PROGRAM: Final = "program"
 FINGERBOT_BUTTON_EVENT: Final = "fingerbot_button_pressed"
 
+<<<<<<< HEAD
 
 class WorkMode(StrEnum):
     """Work modes."""
@@ -73,6 +82,8 @@ class WorkMode(StrEnum):
     WHITE = "white"
 
 
+=======
+>>>>>>> 5086282032056e1989c08910456aca1c190c86fa
 @dataclass
 class Country:
     """Describe a supported country."""
