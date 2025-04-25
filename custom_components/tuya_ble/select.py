@@ -95,42 +95,6 @@ class TuyaBLESmartWeatherMapping(TuyaBLESelectMapping):
 
 
 @dataclass
-class TuyaBLEWeatherDelayMapping(TuyaBLESelectMapping):
-    description: SelectEntityDescription = field(
-        default_factory=lambda: SelectEntityDescription(
-            key="weather_delay",
-            entity_category=EntityCategory.CONFIG,
-            options=
-                [
-                    "cancel",
-                    "24h",
-                    "48h",
-                    "72h",
-                    "96h",
-                    "120h",
-                    "144h",
-                    "168h",
-                ],
-        )
-    )
-
-@dataclass
-class TuyaBLESmartWeatherMapping(TuyaBLESelectMapping):
-    description: SelectEntityDescription = field(
-        default_factory=lambda: SelectEntityDescription(
-            key="smart_weather",
-            entity_category=EntityCategory.CONFIG,
-            options=
-                [
-                    "sunny",
-                    "cloudy",
-                    "rainy",
-                ],
-        )
-    )
-
-
-@dataclass
 class TuyaBLECategorySelectMapping:
     products: dict[str, list[TuyaBLESelectMapping]] | None = None
     mapping: list[TuyaBLESelectMapping] | None = None
