@@ -333,6 +333,7 @@ class TuyaBLEData:
 
 @dataclass
 class TuyaBLECategoryInfo:
+    """Defines category info"""
     products: dict[str, TuyaBLEProductInfo]
     info: TuyaBLEProductInfo | None = None
 

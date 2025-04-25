@@ -160,7 +160,7 @@ class HASSTuyaBLEDeviceManager(AbstaractTuyaBLEDeviceManager):
 
     def _check_login(self) -> bool:
         cache_key = self._get_cache_key(self._data)
-        return _cache.get(cache_key) != None
+        return _cache.get(cache_key) is not None
 
     async def login(self, add_to_cache: bool = False) -> dict[Any, Any]:
         return await self._login(self._data, add_to_cache)

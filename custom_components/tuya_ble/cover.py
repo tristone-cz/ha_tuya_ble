@@ -117,6 +117,7 @@ mapping: dict[str, TuyaBLECategoryCoverMapping] = {
 
 
 def get_mapping_by_device(device: TuyaBLEDevice) -> list[TuyaBLECategoryCoverMapping]:
+    """For a given device, work out the category cover mapping"""
     category = mapping.get(device.category)
     if category is not None and category.products is not None:
         product_mapping = category.products.get(device.product_id)

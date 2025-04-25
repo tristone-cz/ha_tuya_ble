@@ -36,6 +36,7 @@ TuyaBLEBinarySensorIsAvailable = (
 
 @dataclass
 class TuyaBLEBinarySensorMapping:
+    """Models a BLE binary sensor"""
     dp_id: int
     description: BinarySensorEntityDescription
     force_add: bool = True
@@ -48,6 +49,7 @@ class TuyaBLEBinarySensorMapping:
 
 @dataclass
 class TuyaBLECategoryBinarySensorMapping:
+    """Maps between a dict of products and the sensors"""
     products: dict[str, list[TuyaBLEBinarySensorMapping]] | None = None
     mapping: list[TuyaBLEBinarySensorMapping] | None = None
 
