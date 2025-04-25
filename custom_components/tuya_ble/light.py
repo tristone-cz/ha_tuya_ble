@@ -10,6 +10,8 @@ import copy
 
 from typing import Any, cast
 
+from homeassistant.util import color as color_util
+
 from homeassistant.components.light import (
     ATTR_BRIGHTNESS,
     ATTR_COLOR_TEMP_KELVIN,
@@ -784,7 +786,7 @@ class TuyaBLELight(TuyaBLEEntity, LightEntity):
         return round(brightness)
 
     @property
-    def color_temp(self) -> int | None:
+    def color_temp_kelvin(self) -> int | None:
         """Return the color_temp of the light."""
         if not self._color_temp:
             return None
@@ -793,9 +795,11 @@ class TuyaBLELight(TuyaBLEEntity, LightEntity):
         if temperature is None:
             return None
 
-        return round(
-            self._color_temp.remap_value_to(
-                temperature, self.min_mireds, self.max_mireds, reverse=True
+        return color_util.color_temperature_mired_to_kelvin(
+            round(
+                self._color_temp.remap_value_to(
+                    temperature, self.min_mireds, self.max_mireds, reverse=True
+                )
             )
         )
 
