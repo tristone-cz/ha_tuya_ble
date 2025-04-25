@@ -41,6 +41,8 @@ class TuyaBLESelectMapping:
 
 @dataclass
 class TemperatureUnitDescription(SelectEntityDescription):
+    """Description of temperature unit"""
+
     key: str = "temperature_unit"
     icon: str = "mdi:thermometer"
     entity_category: EntityCategory = EntityCategory.CONFIG
@@ -48,6 +50,8 @@ class TemperatureUnitDescription(SelectEntityDescription):
 
 @dataclass
 class TuyaBLEFingerbotModeMapping(TuyaBLESelectMapping):
+    """Fingerbot mode mapping"""
+
     description: SelectEntityDescription = field(
         default_factory=lambda: SelectEntityDescription(
             key="fingerbot_mode",

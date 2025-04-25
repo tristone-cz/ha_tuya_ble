@@ -32,6 +32,8 @@ TUYA_COVER_STATE_MAP = {0: STATE_OPEN, 2: STATE_CLOSED}
 
 
 class TuyaCoverState(IntEnum):
+    """State of cover"""
+
     OPEN = 0
     STOP = 1
     CLOSE = 2
