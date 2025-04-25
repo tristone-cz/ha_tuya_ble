@@ -544,7 +544,6 @@ mapping: dict[str, TuyaBLECategorySensorMapping] = {
                         entity_category=EntityCategory.DIAGNOSTIC,
                         state_class=SensorStateClass.MEASUREMENT,
                     ),
-
                 ),
             ],
         },
