@@ -56,7 +56,7 @@ def get_fingerbot_program(
     result: float | None = None
     if product.fingerbot and product.fingerbot.program:
         datapoint = self._device.datapoints[product.fingerbot.program]
-        if datapoint and type(datapoint.value) is bytes:
+        if datapoint and isinstance(datapoint.value, bytes):
             result = ""
             step_count: int = datapoint.value[3]
             for step in range(step_count):
@@ -80,7 +80,7 @@ def set_fingerbot_program(
 ) -> None:
     if product.fingerbot and product.fingerbot.program:
         datapoint = self._device.datapoints[product.fingerbot.program]
-        if datapoint and type(datapoint.value) is bytes:
+        if datapoint and isinstance(datapoint.value, bytes):
             new_value = bytearray(datapoint.value[0:3])
             steps = value.split(";")
             new_value += int.to_bytes(len(steps), 1, "big")

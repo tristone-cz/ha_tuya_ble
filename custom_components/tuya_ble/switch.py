@@ -84,7 +84,7 @@ def get_fingerbot_program_repeat_forever(
     result: bool | None = None
     if product.fingerbot and product.fingerbot.program:
         datapoint = self._device.datapoints[product.fingerbot.program]
-        if datapoint and type(datapoint.value) is bytes:
+        if datapoint and isinstance(datapoint.value, bytes):
             repeat_count = int.from_bytes(datapoint.value[0:2], "big")
             result = repeat_count == 0xFFFF
     return result
@@ -95,7 +95,7 @@ def set_fingerbot_program_repeat_forever(
 ) -> None:
     if product.fingerbot and product.fingerbot.program:
         datapoint = self._device.datapoints[product.fingerbot.program]
-        if datapoint and type(datapoint.value) is bytes:
+        if datapoint and isinstance(datapoint.value, bytes):
             new_value = (
                 int.to_bytes(0xFFFF if value else 1, 2, "big") + datapoint.value[2:]
             )
