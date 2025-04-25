@@ -42,12 +42,6 @@ from .const import (
     CONF_AUTH_TYPE,
     CONF_ENDPOINT,
     DOMAIN,
-    CONF_ACCESS_ID,
-    CONF_ACCESS_SECRET,
-    CONF_AUTH_TYPE,
-    SMARTLIFE_APP,
-    TUYA_SMART_APP,
-    TUYA_COUNTRIES,
 )
 from .devices import TuyaBLEData, get_device_readable_name
 from .cloud import HASSTuyaBLEDeviceManager

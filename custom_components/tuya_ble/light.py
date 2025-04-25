@@ -890,8 +890,6 @@ class TuyaBLELight(TuyaBLEEntity, LightEntity):
 
         return len(status_data) > 12
 
-        return round(brightness)
-
     @property
     def color_temp(self) -> int | None:
         """Return the color_temp of the light."""
@@ -957,7 +955,8 @@ class TuyaBLELight(TuyaBLEEntity, LightEntity):
                 s_value=s,
                 v_value=v,
             )
-        elif len(status_data) > 12:
+
+        if len(status_data) > 12:
             # Encoding for RGB devices from localtuya light component
             h = int(status_data[6:10], 16)
             s = int(status_data[10:12], 16)
