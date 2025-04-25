@@ -273,23 +273,6 @@ class TuyaBLEDeviceFunction:
         super().__setattr__(name, value)
 
 
-@dataclass
-class TuyaBLEDeviceFunction:
-    """Device function"""
-
-    code: str
-    dp_id: int
-    type: DPType
-    values: str | dict | list | None
-
-    def __setattr__(self, name: str, value: str | dict | list | None):
-        if name == "values":
-            # string values are JSON representations of the actual values
-            if isinstance(value, str) and (v := json.loads(value)):
-                value = v
-        super().__setattr__(name, value)
-
-
 class TuyaBLEDevice:
     """Abstract model of a device"""
 
