@@ -162,9 +162,6 @@ class TuyaBLEDataPoint:
     def changed_by_device(self) -> bool:
         return self._changed_by_device
 
-    def __repr__(self):
-        return f"{{id:{self.id} type:{self.type} value:{self.value}}}"
-
     def __str__(self):
         return f"{self}"
 
