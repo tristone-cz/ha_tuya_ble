@@ -146,7 +146,7 @@ class TuyaBLEEntity(CoordinatorEntity):
                 dttype = self.get_dptype(code)
                 if isinstance(value, str):
                     # We suppose here that cloud JSON type are sent as string
-                    if dttype == DPType.STRING or dttype == DPType.JSON:
+                    if dttype in (DPType.STRING, DPType.JSON):
                         self.send_dp_value(code, TuyaBLEDataPointType.DT_STRING, value)
                     elif dttype == DPType.ENUM:
                         int_value = 0
