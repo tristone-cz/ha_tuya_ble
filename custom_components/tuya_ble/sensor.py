@@ -350,36 +350,6 @@ mapping: dict[str, TuyaBLECategorySensorMapping] = {
                 TuyaBLETemperatureMapping(
                     dp_id=1,
                     coefficient=10.0,
-                ),
-                TuyaBLESensorMapping(
-                    dp_id=2,
-                    description=SensorEntityDescription(
-                        key="moisture",
-                        device_class=SensorDeviceClass.MOISTURE,
-                        native_unit_of_measurement=PERCENTAGE,
-                        state_class=SensorStateClass.MEASUREMENT,
-                    ),
-                ),
-                TuyaBLEBatteryMapping(dp_id=4),
-            ],
-            "tv6peegl": [  # Soil moisture sensor
-                TuyaBLETemperatureMapping(
-                    dp_id=101,
-                ),
-                TuyaBLESensorMapping(
-                    dp_id=102,
-                    description=SensorEntityDescription(
-                        key="moisture",
-                        device_class=SensorDeviceClass.MOISTURE,
-                        native_unit_of_measurement=PERCENTAGE,
-                        state_class=SensorStateClass.MEASUREMENT,
-                    ),
-                ),
-            ],
-            "iv7hudlj": [
-                TuyaBLETemperatureMapping(
-                    dp_id=1,
-                    coefficient=10.0,
                     description=SensorEntityDescription(
                         key="va_temperature",
                         device_class=SensorDeviceClass.TEMPERATURE,
@@ -390,8 +360,8 @@ mapping: dict[str, TuyaBLECategorySensorMapping] = {
                 TuyaBLESensorMapping(
                     dp_id=2,
                     description=SensorEntityDescription(
-                        key="va_humidity",
-                        device_class=SensorDeviceClass.HUMIDITY,
+                        key="va_moisture",
+                        device_class=SensorDeviceClass.MOISTURE,
                         native_unit_of_measurement=PERCENTAGE,
                         state_class=SensorStateClass.MEASUREMENT,
                     ),
@@ -403,6 +373,20 @@ mapping: dict[str, TuyaBLECategorySensorMapping] = {
                         device_class=SensorDeviceClass.BATTERY,
                         native_unit_of_measurement=PERCENTAGE,
                         entity_category=EntityCategory.DIAGNOSTIC,
+                        state_class=SensorStateClass.MEASUREMENT,
+                    ),
+                ),
+            ],
+            "tv6peegl": [  # Soil moisture sensor
+                TuyaBLETemperatureMapping(
+                    dp_id=101,
+                ),
+                TuyaBLESensorMapping(
+                    dp_id=102,
+                    description=SensorEntityDescription(
+                        key="moisture",
+                        device_class=SensorDeviceClass.MOISTURE,
+                        native_unit_of_measurement=PERCENTAGE,
                         state_class=SensorStateClass.MEASUREMENT,
                     ),
                 ),
