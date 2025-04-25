@@ -63,8 +63,7 @@ def get_fingerbot_program(
                 step_pos = 4 + step * 3
                 step_data = datapoint.value[step_pos : step_pos + 3]
                 position, delay = unpack(">BH", step_data)
-                if delay > 9999:
-                    delay = 9999
+                delay = min(delay, 9999)
                 result += (
                     (";" if step > 0 else "")
                     + str(position)

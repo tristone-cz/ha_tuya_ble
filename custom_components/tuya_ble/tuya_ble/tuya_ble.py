@@ -191,6 +191,8 @@ class TuyaBLEDataPoint:
 
 
 class TuyaBLEDataPoints:
+    """Models DPs"""
+
     def __init__(self, owner: TuyaBLEDevice) -> None:
         self._owner = owner
         self._datapoints: dict[int, TuyaBLEDataPoint] = {}
@@ -209,6 +211,7 @@ class TuyaBLEDataPoints:
 
     @property
     def last_data_received(self) -> datetime | None:
+        """Last data received"""
         return self._last_data_received
 
     def has_id(self, id: int, type: TuyaBLEDataPointType | None = None) -> bool:
@@ -222,6 +225,7 @@ class TuyaBLEDataPoints:
         type: TuyaBLEDataPointType,
         value: bytes | bool | int | str | None = None,
     ) -> TuyaBLEDataPoint:
+        """Lazy loaded datapoint"""
         datapoint = self._datapoints.get(id)
         if datapoint:
             return datapoint
@@ -270,6 +274,8 @@ global_connect_lock = asyncio.Lock()
 
 @dataclass
 class TuyaBLEDeviceFunction:
+    """Models a code, DP and values"""
+
     code: str
     dp_id: int
     type: DPType
@@ -285,6 +291,8 @@ class TuyaBLEDeviceFunction:
 
 @dataclass
 class TuyaBLEDeviceFunction:
+    """Device function"""
+
     code: str
     dp_id: int
     type: DPType
@@ -299,6 +307,8 @@ class TuyaBLEDeviceFunction:
 
 
 class TuyaBLEDevice:
+    """Abstract model of a device"""
+
     def __init__(
         self,
         device_manager: AbstaractTuyaBLEDeviceManager,
@@ -487,6 +497,7 @@ class TuyaBLEDevice:
 
     @property
     def uuid(self) -> str:
+        """UUID"""
         if self._device_info is not None:
             return self._device_info.uuid
 
@@ -494,6 +505,7 @@ class TuyaBLEDevice:
 
     @property
     def local_key(self) -> str:
+        """Local key"""
         if self._device_info is not None:
             return self._device_info.local_key
 
@@ -515,6 +527,7 @@ class TuyaBLEDevice:
 
     @property
     def product_id(self) -> str:
+        """Product ID"""
         if self._device_info is not None:
             return self._device_info.product_id
 
@@ -522,6 +535,7 @@ class TuyaBLEDevice:
 
     @property
     def product_model(self) -> str:
+        """Produce model"""
         if self._device_info is not None:
             return self._device_info.product_model
 
@@ -585,6 +599,7 @@ class TuyaBLEDevice:
         return result
 
     def datapoint_log_payload(self) -> dict[Hashable, Any]:
+        """Creates a dict of printable values"""
         item = {}
         for key, value in self.datapoints.__dict__().items():
             if isinstance(value, TuyaBLEDataPoint):
@@ -596,6 +611,7 @@ class TuyaBLEDevice:
 
     @property
     def last_data_received(self) -> datetime | None:
+        """Last data received"""
         return self._datapoints.last_data_received
 
     def get_or_create_datapoint(

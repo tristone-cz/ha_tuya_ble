@@ -361,7 +361,7 @@ class TuyaBLESelect(TuyaBLEEntity, SelectEntity):
         datapoint = self._device.datapoints[self._mapping.dp_id]
         if datapoint:
             value = datapoint.value
-            if value >= 0 and value < len(self._attr_options):
+            if 0 <= value < len(self._attr_options):
                 return self._attr_options[value]
 
             return value

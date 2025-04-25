@@ -51,6 +51,8 @@ _LOGGER = logging.getLogger(__name__)
 
 @dataclass
 class TuyaBLEFingerbotInfo:
+    """Model a fingerbot"""
+
     switch: int
     mode: int
     up_position: int
@@ -63,6 +65,8 @@ class TuyaBLEFingerbotInfo:
 
 @dataclass
 class TuyaBLEWaterValveInfo:
+    """Model a water valve"""
+
     switch: bool
     countdown: int
     weather_delay: str
@@ -72,6 +76,8 @@ class TuyaBLEWaterValveInfo:
 
 @dataclass
 class TuyaBLEProductInfo:
+    """Model product info"""
+
     name: str
     manufacturer: str = DEVICE_DEF_MANUFACTURER
     fingerbot: TuyaBLEFingerbotInfo | None = None

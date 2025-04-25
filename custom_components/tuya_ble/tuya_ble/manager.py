@@ -6,6 +6,8 @@ from dataclasses import dataclass
 
 @dataclass
 class TuyaBLEDeviceCredentials:
+    """Model of credentials"""
+
     uuid: str
     local_key: str
     device_id: str
