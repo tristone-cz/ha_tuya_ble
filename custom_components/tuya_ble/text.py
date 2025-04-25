@@ -106,6 +106,7 @@ class TuyaBLETextMapping:
 
 @dataclass
 class TuyaBLECategoryTextMapping:
+    """Models a dict of products and their mappings"""
     products: dict[str, list[TuyaBLETextMapping]] | None = None
     mapping: list[TuyaBLETextMapping] | None = None
 
@@ -164,6 +165,7 @@ mapping: dict[str, TuyaBLECategoryTextMapping] = {
 
 
 def get_mapping_by_device(device: TuyaBLEDevice) -> list[TuyaBLETextMapping]:
+    """Lookup mapping for a given device"""
     category = mapping.get(device.category)
     if category is not None and category.products is not None:
         product_mapping = category.products.get(device.product_id)

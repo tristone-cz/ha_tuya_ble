@@ -80,6 +80,7 @@ class TuyaBLETemperatureMapping(TuyaBLESensorMapping):
 
 
 def is_co2_alarm_enabled(self: TuyaBLESensor, product: TuyaBLEProductInfo) -> bool:
+    """For a given sensor, read the datapoints and determine if co2 alarm is enabled"""
     result: bool = True
     datapoint = self._device.datapoints[13]
     if datapoint:
@@ -88,6 +89,7 @@ def is_co2_alarm_enabled(self: TuyaBLESensor, product: TuyaBLEProductInfo) -> bo
 
 
 def battery_enum_getter(self: TuyaBLESensor) -> None:
+    """For a given sensor, read the datapoints and detemine battery info"""
     datapoint = self._device.datapoints[104]
     if datapoint:
         self._attr_native_value = datapoint.value * 20.0
@@ -95,6 +97,7 @@ def battery_enum_getter(self: TuyaBLESensor) -> None:
 
 @dataclass
 class TuyaBLECategorySensorMapping:
+    """Models a dict of products and their mappings"""
     products: dict[str, list[TuyaBLESensorMapping]] | None = None
     mapping: list[TuyaBLESensorMapping] | None = None
 

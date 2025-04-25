@@ -54,6 +54,7 @@ class TuyaBLECoverMapping:
 
 @dataclass
 class TuyaBLECategoryCoverMapping:
+    """Models a dict of products and their mappings"""
     products: dict[str, list[TuyaBLECoverMapping]] | None = None
     mapping: list[TuyaBLECoverMapping] | None = None
 

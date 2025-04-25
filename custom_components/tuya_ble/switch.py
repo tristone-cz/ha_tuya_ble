@@ -146,6 +146,7 @@ class TuyaBLEReversePositionsMapping(TuyaBLESwitchMapping):
 
 @dataclass
 class TuyaBLECategorySwitchMapping:
+    """Models a dict of products and their mappings"""
     products: dict[str, list[TuyaBLESwitchMapping]] | None = None
     mapping: list[TuyaBLESwitchMapping] | None = None
 
@@ -458,6 +459,7 @@ mapping: dict[str, TuyaBLECategorySwitchMapping] = {
 
 
 def get_mapping_by_device(device: TuyaBLEDevice) -> list[TuyaBLECategorySwitchMapping]:
+    """Lookup mapping for a given device"""
     category = mapping.get(device.category)
     if category is not None and category.products is not None:
         product_mapping = category.products.get(device.product_id)
