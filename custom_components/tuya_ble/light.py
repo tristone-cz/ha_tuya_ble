@@ -873,22 +873,6 @@ class TuyaBLELight(TuyaBLEEntity, LightEntity):
         return len(status_data) > 12
 
     @property
-    def color_temp(self) -> int | None:
-        """Return the color_temp of the light."""
-        if not self._color_temp:
-            return None
-
-        temperature = self._device.status.get(self._color_temp.dpcode)
-        if temperature is None:
-            return None
-
-        return round(
-            self._color_temp.remap_value_to(
-                temperature, self.min_mireds, self.max_mireds, reverse=True
-            )
-        )
-
-    @property
     def hs_color(self) -> tuple[float, float] | None:
         """Return the hs_color of the light."""
         if self._color_data_dpcode is None or not (
