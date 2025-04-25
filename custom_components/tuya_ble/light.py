@@ -873,15 +873,6 @@ class TuyaBLELight(TuyaBLEEntity, LightEntity):
         return len(status_data) > 12
 
     @property
-    def hs_color(self) -> tuple[float, float] | None:
-        """Return the hs_color of the light."""
-        if self._color_data_dpcode is None or not (
-            color_data := self._get_color_data()
-        ):
-            return None
-        return color_data.hs_color
-
-    @property
     def color_mode(self) -> ColorMode:
         """Return the color_mode of the light."""
         # We consider it to be in HS color mode, when work mode is anything
