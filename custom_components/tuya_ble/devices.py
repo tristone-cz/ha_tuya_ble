@@ -151,8 +151,8 @@ class TuyaBLEEntity(CoordinatorEntity):
                     elif dttype == DPType.ENUM:
                         int_value = 0
                         values = self.device.function[code].values
-                        if isinstance(self.device.function[code].values, dict):
-                            range = self.device.function[code].values.get("range")
+                        if isinstance(values, dict):
+                            range = values.get("range")
                             if isinstance(range, list):
                                 int_value = (
                                     range.index(value) if value in range else None
