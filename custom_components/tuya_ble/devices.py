@@ -592,6 +592,7 @@ def get_device_product_info(device: TuyaBLEDevice) -> TuyaBLEProductInfo | None:
 
 
 def get_short_address(address: str) -> str:
+    """Short address"""
     results = address.replace("-", ":").upper().split(":")
     return f"{results[-3]}{results[-2]}{results[-1]}"[-6:]
 
@@ -600,6 +601,7 @@ async def get_device_readable_name(
     discovery_info: BluetoothServiceInfoBleak,
     manager: AbstaractTuyaBLEDeviceManager | None,
 ) -> str:
+    """Readable name"""
     credentials: TuyaBLEDeviceCredentials | None = None
     product_info: TuyaBLEProductInfo | None = None
     if manager:

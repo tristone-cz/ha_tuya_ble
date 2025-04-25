@@ -867,7 +867,7 @@ class TuyaBLELight(TuyaBLEEntity, LightEntity):
         if not (status_data := self.device.status[self._color_data_dpcode]):
             return False
 
-        if not (isinstance(status_data, str)):
+        if not isinstance(status_data, str):
             return False
 
         return len(status_data) > 12
@@ -915,7 +915,7 @@ class TuyaBLELight(TuyaBLEEntity, LightEntity):
         if not (status_data := self.device.status[self._color_data_dpcode]):
             return False
 
-        if not (isinstance(status_data, str)):
+        if not isinstance(status_data, str):
             return False
 
         return len(status_data) > 12

@@ -75,19 +75,6 @@ class TuyaBLEEntityDescription:
     values_defaults: dict[str, dict] | None = None
 
 
-# @dataclass
-class TuyaBLEEntityDescription:
-    # Added to info that we get from the cloud
-    function: list[dict[str, dict]] | None = None
-    status_range: list[dict[str, dict]] | None = None
-
-    # Replace the values that we got from the cloud
-    values_overrides: dict[str, dict] | None = None
-
-    # Values if nothing was set from the cloud
-    values_defaults: dict[str, dict] | None = None
-
-
 class TuyaBLEDataPoint:
     def __init__(
         self,
