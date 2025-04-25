@@ -872,22 +872,6 @@ class TuyaBLELight(TuyaBLEEntity, LightEntity):
 
         return len(status_data) > 12
 
-    @property
-    def color_mode(self) -> ColorMode:
-        """Return the color_mode of the light."""
-        # We consider it to be in HS color mode, when work mode is anything
-        # else than "white".
-        if (
-            self._color_mode_dpcode
-            and self.device.status.get(self._color_mode_dpcode) != WorkMode.WHITE
-        ):
-            return ColorMode.HS
-        if self._color_temp:
-            return ColorMode.COLOR_TEMP
-        if self._brightness:
-            return ColorMode.BRIGHTNESS
-        return ColorMode.ONOFF
-
     def _get_color_data(self) -> ColorData | None:
         """Get current color data from device."""
         if (
