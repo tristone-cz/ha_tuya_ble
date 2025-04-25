@@ -500,23 +500,6 @@ devices_database: dict[str, TuyaBLECategoryInfo] = {
     ),
     "sfkzq": TuyaBLECategoryInfo(
         products={
-            "0axr5s0b": TuyaBLEProductInfo(  # device product_id
-                name="Valve controller",
-            ),
-            "nxquc5lb": TuyaBLEProductInfo(
-                name="Water valve controller",
-                watervalve=TuyaBLEWaterValveInfo(
-                    switch=1,
-                    countdown=8,
-                    weather_delay=10,
-                    smart_weather=13,
-                    use_time=9,
-                ),
-            ),
-        },
-    ),
-    "sfkzq": TuyaBLECategoryInfo(
-        products={
             **dict.fromkeys(
                 [
                     "6pahkcau",
@@ -529,8 +512,18 @@ devices_database: dict[str, TuyaBLECategoryInfo] = {
                     name="Irrigation computer",
                 ),
             ),
-            "nxquc5lb": TuyaBLEProductInfo(  # device product_id
+            "0axr5s0b": TuyaBLEProductInfo(  # device product_id
+                name="Valve controller",
+            ),
+            "nxquc5lb": TuyaBLEProductInfo(
                 name="Water valve controller",
+                watervalve=TuyaBLEWaterValveInfo(
+                    switch=1,
+                    countdown=8,
+                    weather_delay=10,
+                    smart_weather=13,
+                    use_time=9,
+                ),
             ),
         },
     ),
