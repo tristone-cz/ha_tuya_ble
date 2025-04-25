@@ -103,7 +103,7 @@ class TuyaBLECategorySelectMapping:
 mapping: dict[str, TuyaBLECategorySelectMapping] = {
     "sfkzq": TuyaBLECategorySelectMapping(
         products={
-            "nxquc5lb": [  # Smart Water Valve
+            "0axr5s0b": [  # Valve Controller
                 TuyaBLESelectMapping(
                     dp_id=10,
                     description=SelectEntityDescription(
@@ -117,8 +117,20 @@ mapping: dict[str, TuyaBLECategorySelectMapping] = {
                         entity_category=EntityCategory.CONFIG,
                     ),
                 ),
-            ]
-        }
+                TuyaBLESelectMapping(
+                    dp_id=12,
+                    description=SelectEntityDescription(
+                        key="work_state",
+                        options=["auto", "manual", "idle"],
+                        entity_category=EntityCategory.CONFIG,
+                    ),
+                ),
+            ],
+            "nxquc5lb": [  # Smart water timer - SOP10
+                TuyaBLEWeatherDelayMapping(dp_id=10),
+                TuyaBLESmartWeatherMapping(dp_id=13),
+            ],
+        },
     ),
     "co2bj": TuyaBLECategorySelectMapping(
         products={
@@ -332,37 +344,6 @@ mapping: dict[str, TuyaBLECategorySelectMapping] = {
                         entity_category=EntityCategory.CONFIG,
                     ),
                 ),
-            ],
-        },
-    ),
-    "sfkzq": TuyaBLECategorySelectMapping(
-        products={
-            "0axr5s0b": [  # Valve Controller
-                TuyaBLESelectMapping(
-                    dp_id=10,
-                    description=SelectEntityDescription(
-                        key="weather_delay",
-                        options=[
-                            "cancel",
-                            "24h",
-                            "48h",
-                            "72h",
-                        ],
-                        entity_category=EntityCategory.CONFIG,
-                    ),
-                ),
-                TuyaBLESelectMapping(
-                    dp_id=12,
-                    description=SelectEntityDescription(
-                        key="work_state",
-                        options=["auto", "manual", "idle"],
-                        entity_category=EntityCategory.CONFIG,
-                    ),
-                ),
-            ],
-            "nxquc5lb": [  # Smart water timer - SOP10
-                TuyaBLEWeatherDelayMapping(dp_id=10),
-                TuyaBLESmartWeatherMapping(dp_id=13),
             ],
         },
     ),
