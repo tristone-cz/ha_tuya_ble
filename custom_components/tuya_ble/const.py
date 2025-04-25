@@ -71,7 +71,6 @@ FINGERBOT_MODE_SWITCH: Final = "switch"
 FINGERBOT_MODE_PROGRAM: Final = "program"
 FINGERBOT_BUTTON_EVENT: Final = "fingerbot_button_pressed"
 
-<<<<<<< HEAD
 
 class WorkMode(StrEnum):
     """Work modes."""
@@ -82,8 +81,6 @@ class WorkMode(StrEnum):
     WHITE = "white"
 
 
-=======
->>>>>>> 5086282032056e1989c08910456aca1c190c86fa
 @dataclass
 class Country:
     """Describe a supported country."""

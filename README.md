@@ -56,9 +56,13 @@ The integration works locally, but connection to Tuya BLE device requires device
   + Smart water bottle (product_id 'cdlandip')
 
 * Irrigation computer (category_id 'ggq')
+<<<<<<< HEAD
   + Irrigation computer (product_id '6pahkcau')
   + 2-outlet irrigation computer (product_ids 'hfgdqhho', 'fnlw6npo', 'qycalacn', 'jjqi2syk')
     - also known as: SGW02, SGW08, MOES BWV-YC02-EU-GY, Kogan SmarterHome KASMWATMRDA / KASMWTV2LVA
+=======
+  + Irrigation computer (product_ids '6pahkcau', 'hfgdqhho')
+>>>>>>> jbsky/main
 
 * Covers (category_id 'cl')
   + Moes Roller Blind Motor (product_id '4pbr8eig')

@@ -123,3 +123,24 @@ As a result, the following are available.
 
 - fix: Compatibility with HA 2024.1
 - Fix deprecated
+
+## [0.2.1] - 2025-03-26
+
+### Added
+
+- Add ggq/hfgdqhho device
+
+### Fixed
+
+- fix: Compatibility with HA 2025.3
+- Fix deprecated
+
+## [0.2.2] - 2025-04-16
+
+### Fixed
+
+- Fix deprecated with Home assistant 2025.4.2
+
+### Update
+
+- Update README about device support
