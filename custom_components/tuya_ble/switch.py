@@ -153,15 +153,20 @@ class TuyaBLECategorySwitchMapping:
 mapping: dict[str, TuyaBLECategorySwitchMapping] = {
     "sfkzq": TuyaBLECategorySwitchMapping(
         products={
-            "nxquc5lb": [  # Smart Water Valve
+            "0axr5s0b": [  # Valve Controller
                 TuyaBLESwitchMapping(
                     dp_id=1,
                     description=SwitchEntityDescription(
                         key="water_valve",
+                        entity_registry_enabled_default=True,
                     ),
                 ),
-            ]
-        }
+            ],
+            "nxquc5lb": [  # Smart water timer - SOP10
+                TuyaBLEWaterValveSwitchMapping(dp_id=1),
+                TuyaBLEWaterValveWeatherSwitchMapping(dp_id=14),
+            ],
+        },
     ),
     "co2bj": TuyaBLECategorySwitchMapping(
         products={
@@ -447,23 +452,6 @@ mapping: dict[str, TuyaBLECategorySwitchMapping] = {
                     ),
                 ],
             ),
-        },
-    ),
-    "sfkzq": TuyaBLECategorySwitchMapping(
-        products={
-            "0axr5s0b": [  # Valve Controller
-                TuyaBLESwitchMapping(
-                    dp_id=1,
-                    description=SwitchEntityDescription(
-                        key="water_valve",
-                        entity_registry_enabled_default=True,
-                    ),
-                ),
-            ],
-            "nxquc5lb": [  # Smart water timer - SOP10
-                TuyaBLEWaterValveSwitchMapping(dp_id=1),
-                TuyaBLEWaterValveWeatherSwitchMapping(dp_id=14),
-            ],
         },
     ),
 }
