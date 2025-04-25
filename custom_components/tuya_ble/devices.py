@@ -60,6 +60,13 @@ class TuyaBLEFingerbotInfo:
     manual_control: int = 0
     program: int = 0
 
+@dataclass
+class TuyaBLEWaterValveInfo:
+    switch: bool
+    countdown: int
+    weather_delay: str
+    smart_weather: str
+    use_time: int
 
 @dataclass
 class TuyaBLEWaterValveInfo:
