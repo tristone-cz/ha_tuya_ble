@@ -524,14 +524,6 @@ class TuyaBLEDevice:
         return self._status_range
 
     @property
-    def function(self) -> dict(str, dict):
-        return self._function
-
-    @property
-    def status_range(self) -> dict(str, dict):
-        return self._status_range
-
-    @property
     def device_version(self) -> str:
         return self._device_version
 
