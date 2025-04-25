@@ -44,6 +44,7 @@ TuyaBLESensorIsAvailable = Callable[["TuyaBLESensor", TuyaBLEProductInfo], bool]
 
 @dataclass
 class TuyaBLESensorMapping:
+    """Model a DP, description and default values"""
     dp_id: int
     description: SensorEntityDescription
     force_add: bool = True

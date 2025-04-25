@@ -28,6 +28,7 @@ TuyaBLEButtonIsAvailable = Callable[["TuyaBLEButton", TuyaBLEProductInfo], bool]
 
 @dataclass
 class TuyaBLEButtonMapping:
+    """Model a DP, description and default values"""
     dp_id: int
     description: ButtonEntityDescription
     force_add: bool = True

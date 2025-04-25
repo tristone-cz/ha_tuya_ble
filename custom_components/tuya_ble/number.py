@@ -46,6 +46,7 @@ TuyaBLENumberSetter = (
 
 @dataclass
 class TuyaBLENumberMapping:
+    """Model a DP, description and default values"""
     dp_id: int
     description: NumberEntityDescription
     force_add: bool = True

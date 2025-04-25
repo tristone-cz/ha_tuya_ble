@@ -31,6 +31,7 @@ _LOGGER = logging.getLogger(__name__)
 
 @dataclass
 class TuyaBLESelectMapping:
+    """Model a DP, description and default values"""
     dp_id: int
     description: SelectEntityDescription
     force_add: bool = True

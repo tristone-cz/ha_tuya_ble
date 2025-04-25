@@ -94,6 +94,7 @@ def set_fingerbot_program(
 
 @dataclass
 class TuyaBLETextMapping:
+    """Model a DP, description and default values"""
     dp_id: int
     description: TextEntityDescription
     force_add: bool = True

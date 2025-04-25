@@ -39,6 +39,7 @@ class TuyaCoverState(IntEnum):
 
 @dataclass
 class TuyaBLECoverMapping:
+    """Model a DP, description and default values"""
     description: CoverEntityDescription
 
     cover_state_dp_id: int = 0

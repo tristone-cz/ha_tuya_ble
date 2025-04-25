@@ -32,6 +32,8 @@ _LOGGER = logging.getLogger(__name__)
 
 @dataclass
 class TuyaBLEClimateMapping:
+    """Model a DP, description and default values"""
+
     description: ClimateEntityDescription
 
     hvac_mode_dp_id: int = 0
