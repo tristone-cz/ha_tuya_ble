@@ -132,7 +132,6 @@ class TuyaBLEEntity(CoordinatorEntity):
         dp_type: TuyaBLEDataPointType,
         value: bytes | bool | int | str | None = None,
     ) -> None:
-
         dpid = self.find_dpid(key)
         if dpid is not None:
             datapoint = self._device.datapoints.get_or_create(
