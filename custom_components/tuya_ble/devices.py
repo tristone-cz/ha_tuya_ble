@@ -520,8 +520,21 @@ devices_database: dict[str, TuyaBLECategoryInfo] = {
                     name="Irrigation computer",
                 ),
             ),
-            "0axr5s0b": TuyaBLEProductInfo(  # device product_id
-                name="Valve controller",
+            **dict.fromkeys(
+                [
+                    "svhikeyq",
+                    "0axr5s0b",
+                ],  # device product_id
+                TuyaBLEProductInfo(
+                    name="Valve controller",
+                    watervalve=TuyaBLEWaterValveInfo(
+                        switch=1,
+                        countdown=11,
+                        weather_delay=10,
+                        smart_weather=13,
+                        use_time=15,
+                    ),
+                ),
             ),
             **dict.fromkeys(
                 [

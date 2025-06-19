@@ -588,7 +588,7 @@ mapping: dict[str, TuyaBLECategorySensorMapping] = {
                 ),
             ],
             **dict.fromkeys(
-                ["46zia2nz", "1fcnd8xk", "nxquc5lb"],
+                ["46zia2nz", "1fcnd8xk", "nxquc5lb", "svhikeyq"],
                 [
                     TuyaBLEBatteryMapping(dp_id=7),
                     TuyaBLEWorkStateMapping(dp_id=12),
@@ -604,7 +604,7 @@ mapping: dict[str, TuyaBLECategorySensorMapping] = {
                     TuyaBLESensorMapping(
                         dp_id=9,
                         description=SensorEntityDescription(
-                            key="use_time",
+                            key="time_use",
                             device_class=SensorDeviceClass.DURATION,
                             native_unit_of_measurement=UnitOfTime.SECONDS,
                             state_class=SensorStateClass.MEASUREMENT,
