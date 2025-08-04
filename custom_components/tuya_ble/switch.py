@@ -349,6 +349,14 @@ mapping: dict[str, TuyaBLECategorySwitchMapping] = {
                     ),
                 ],
             ),
+            **dict.fromkeys(
+                ["bs3ubslo"],  # Fingerbot Plus
+                [
+                    TuyaBLEFingerbotSwitchMapping(dp_id=1),
+                    TuyaBLEFingerbotSwitchMapping(dp_id=2),
+                ],
+            ),
+            
         },
     ),
     "wk": TuyaBLECategorySwitchMapping(
