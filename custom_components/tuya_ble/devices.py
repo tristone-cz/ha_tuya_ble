@@ -489,6 +489,11 @@ devices_database: dict[str, TuyaBLECategoryInfo] = {
                     name="Fingerbot Touch",
                     fingerbot=TuyaBLEFingerbotInfo(
                         switch=1,
+                        mode=101,
+                        up_position=106,
+                        down_position=102,
+                        hold_time=103,
+                        reverse_positions=104,
                     ),
                 ),
             ),
